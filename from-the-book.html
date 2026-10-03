@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get a room! — Thea Littledale</title>
-<meta name="description" content="Get a room!, a community venue booking app designed for people with low digital confidence. UX case study by Thea Littledale.">
+<title>From the Book to the Streets — Thea Littledale</title>
+<meta name="description" content="Cover and interior redesign of From the Book to the Streets, an essay collection on typography in public spaces. Editorial case study by Thea Littledale.">
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -408,6 +408,19 @@
   .persona p{ font-size: 0.95rem; line-height: 1.65; color: #3a352b; }
   .persona .need{ margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--serif); font-style: italic; font-size: 1.02rem; line-height: 1.5; color: var(--ink); }
   .persona .need b{ display:block; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+
+  /* ---------- extras for this case study ---------- */
+  .phones.covers img{ width: clamp(120px, 15vw, 210px); box-shadow: 0 8px 24px rgba(22,24,27,0.18); }
+  .phones.photos img{ width: clamp(140px, 20vw, 280px); border-radius: 2px; }
+  .spreads{
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 6vw, 5rem);
+    display: grid; gap: clamp(2rem, 5vw, 4rem);
+  }
+  .spreads img{ width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(22,24,27,0.16); }
+  .credit{ font-size: 0.82rem; color: #6b6f68; line-height: 1.6; max-width: 70ch; margin-top: 2.5rem; }
 </style>
 </head>
 <body>
@@ -426,25 +439,21 @@
 <!-- ============ HEADER ============ -->
 <section class="cs-head">
   <a class="back" href="index.html#work">← All work</a>
-  <p class="eyebrow">Case Study 01 — UX &amp; App Design</p>
-  <h1 class="cs-title">Get a<br><em>room!</em></h1>
-  <p class="cs-summary">A mobile app for finding and booking local community spaces, designed so that people with low digital confidence can book a venue without needing to ask anyone for help.</p>
+  <p class="eyebrow">Case Study 02 — Editorial Design</p>
+  <h1 class="cs-title">From the Book<br><em>to the Streets</em></h1>
+  <p class="cs-summary">A redesign of the cover and interior of an essay collection on lettering and type, from choosing a typeface and grid through to a hand-finished, bound copy.</p>
   <dl class="facts">
-    <div><dt>Module</dt><dd>TG2UX, User-Centred Design</dd></div>
-    <div><dt>Role</dt><dd>Research, wireframes &amp; UI design (group project)</dd></div>
-    <div><dt>Tools</dt><dd>Figma, Stark</dd></div>
-    <div><dt>Timeline</dt><dd>Year 2, 2025–26</dd></div>
+    <div><dt>Module</dt><dd>TG2ED, Editorial Design</dd></div>
+    <div><dt>Role</dt><dd>Cover, interior layout, typesetting &amp; binding</dd></div>
+    <div><dt>Tools</dt><dd>InDesign</dd></div>
+    <div><dt>Timeline</dt><dd>Year 2, 2025</dd></div>
   </dl>
 </section>
 
 <!-- ============ HERO IMAGE ============ -->
 <section class="hero-media">
   <figure class="reveal">
-    <div class="phones">
-      <img src="images/get-a-room/phones/hunainza-1.jpg" alt="Choose a venue type screen">
-      <img src="images/get-a-room/phones/avery-1.jpg" alt="Search results with quick filter toggles">
-      <img src="images/get-a-room/phones/hunainza-4.jpg" alt="Venue page with 18+, bar and wheelchair access tags">
-    </div>
+    <div class="media auto"><img src="images/from-the-book/cover-flat.jpg" alt="The full book jacket: back cover blurb, spine and front cover with large yellow stacked title on dark grey"></div>
   </figure>
 </section>
 
@@ -453,180 +462,116 @@
   <div class="block reveal">
     <div><span class="num">01</span><h2>The Brief</h2></div>
     <div class="block-body">
-      <p>A local council has found that many of its services are underused because the apps and websites behind them are out of date. Our brief was to pick one service area, research who uses it, and design an app prototype in Figma that meets their needs.</p>
-      <p>We chose <strong>booking community spaces</strong>: village halls, community centres, sports facilities and libraries. They're used for everything from fitness classes to support groups, but the ways to book them are often confusing. As a result, a lot of community buildings sit empty.</p>
+      <p>Redesign <em>From the Book to the Streets</em>, a collection of essays on typography in public spaces, published by the Hochschule für Grafik und Buchkunst Leipzig. The project covered a typographic cover, the interior layout of a chapter, the prelims and endmatter, and finally printing and binding a finished copy.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 02 RESEARCH ============ -->
-<section>
+<!-- ============ 02 TYPE & GRID ============ -->
+<section class="tinted">
   <div class="block reveal">
-    <div><span class="num">02</span><h2>Research &amp; Insight</h2></div>
+    <div><span class="num">02</span><h2>Type &amp; Grid</h2></div>
     <div class="block-body">
-      <p>We looked at the main existing booking platforms, AllBooked and PeerSpace. Both had clear layouts and live support, but key details such as location, price and restrictions were hard to find, and their interfaces could shut out less confident users.</p>
-      <p>Older adults turned out to be some of the heaviest users of community buildings, especially village halls, libraries and community cafés. Yet one in seven people aged 65 and over can't turn on a device and log in to an account. Younger people book these spaces the least. That gave us two very different users to design for.</p>
+      <p>I set the same text in four serif typefaces, Inria Serif, Haboro Serif, Noto Serif and Capitolium, to compare them on the printed page rather than on screen. Capitolium won. Its large x-height and condensed width keep long passages readable, and it has the small caps, ligatures and old-style numerals a scholarly text needs.</p>
+      <p>The grid is 6&nbsp;×&nbsp;3, with a wide outer margin for captions and footnotes at the foot of the page. At first I set the footnotes in a different typeface, but feedback showed they looked disconnected from the text, so I changed them to Capitolium at a smaller size. Contrast should support the hierarchy, not break it.</p>
     </div>
   </div>
   <div class="grid-2 reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
     <figure>
-      <div class="media white"><img src="images/get-a-room/workshop-timetable.jpg" alt="Whiteboard covered in sticky notes mapping a day in the life of the persona Hunainza"></div>
-      <figcaption>IBM workshop: mapping Hunainza's day, from planning to booking confirmation.</figcaption>
+      <div class="media square white pad-sm"><img src="images/from-the-book/type-specimen.jpg" alt="Type specimen sheet set in Capitolium"></div>
+      <figcaption>Type specimen in Capitolium.</figcaption>
     </figure>
     <figure>
-      <div class="media white"><img src="images/get-a-room/workshop-map.jpg" alt="Whiteboard stakeholder map showing everyone affected by Hunainza's booking"></div>
-      <figcaption>Stakeholder map: everyone affected by Hunainza's booking. This is where the 18+ rule came from.</figcaption>
+      <div class="media square white pad-sm"><img src="images/from-the-book/grid.jpg" alt="Test page on a 6 by 3 grid with margin captions"></div>
+      <figcaption>Testing the 6 × 3 grid in InDesign.</figcaption>
     </figure>
   </div>
 </section>
 
-<!-- ============ PERSONAS ============ -->
+<!-- ============ 03 THE COVER ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">03</span><h2>The Cover</h2></div>
+    <div class="block-body">
+      <p>I studied typographic covers, from post-war poetry covers inspired by Berthold Wolpe to the work of David Pearson, and designed nine versions with the title as the only image. I started with the classic red and white, then moved to black with red, orange and yellow. These combinations felt more distinctive and suggest road signs, which ties in with the book's subject of lettering on the street.</p>
+      <p>The final cover stacks the title in large yellow type on dark grey, with a bright yellow inside cover so the colour carries through when you open the book.</p>
+    </div>
+  </div>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="phones covers">
+      <img src="images/from-the-book/cover-v1.jpg" alt="Cover version 1: white title on red">
+      <img src="images/from-the-book/cover-v4.jpg" alt="Cover version 4: large stacked white title on red">
+      <img src="images/from-the-book/cover-v5.jpg" alt="Cover version 5: orange stacked title on black">
+      <img src="images/from-the-book/cover-v6.jpg" alt="Cover version 6, the final design: yellow stacked title on black">
+    </div>
+    <figcaption>From first to final: versions 1, 4, 5 and 6.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="tinted">
+  <p class="quote reveal">“Match the intensity of the title with the <span class="accent">sizing, tone and temper</span> of the book.”</p>
+  <span class="quote-src reveal">— David Pearson, guest lecture</span>
+</section>
+
+<!-- ============ 04 THE INTERIOR ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">04</span><h2>The Interior</h2></div>
+    <div class="block-body">
+      <p>Body text runs across two columns, with captions in the margin and footnotes below. The hardest part was keeping every image and footnote on the same spread as its reference, while still giving the archive images enough room. I learned that the designer is responsible for treating images with respect: sizing them properly and never cropping them.</p>
+      <p>The contents page uses tabs and leaders for clean alignment, and the bibliography picks out authors' names in bold.</p>
+    </div>
+  </div>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="spreads">
+      <img src="images/from-the-book/spread-opener.jpg" alt="Chapter opening spread for Rob Banham's essay">
+      <img src="images/from-the-book/spread-1.jpg" alt="Spread with body text and two nineteenth-century theatre posters">
+      <img src="images/from-the-book/spread-3.jpg" alt="Spread with lottery tickets and a large red Astley's circus poster">
+      <img src="images/from-the-book/spread-4.jpg" alt="Spread from the stencil dies chapter with tools and a portrait">
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 05 PRINT & FINISH ============ -->
 <section class="tinted">
   <div class="block reveal">
-    <div><span class="num">03</span><h2>Personas &amp; Needs</h2></div>
+    <div><span class="num">05</span><h2>Print &amp; Finish</h2></div>
     <div class="block-body">
-      <p>From the research we created two personas: an older user with low digital confidence, who represents most people using these spaces, and a younger, tech-savvy user, to show how the app could bring new people in. At the IBM workshop we wrote several needs statements for each, then cut them down to the one thing each person most needs from a booking.</p>
+      <p>To make the yellow title shine like spot UV, I tested three clear finishes by hand: PVA glue, gloss decoupage medium and Mod Podge. I chose PVA because it left no brush marks. Then I printed, trimmed and bound the book myself.</p>
     </div>
   </div>
-  <div class="personas reveal">
-    <div class="persona">
-      <h3>Hunainza <span>65</span></h3>
-      <ul><li>Retired</li><li>Just moved to a rural village</li><li>New to booking venues</li></ul>
-      <p>Feels disconnected from his new village and wants to host a poker night to meet people. The event has to be strictly 18+.</p>
-      <p class="need"><b>Needs statement</b>Needs a way to arrange a poker night while keeping it strictly 18+, so that he can keep the event age-appropriate and meet new people his age.</p>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="phones photos">
+      <img src="images/from-the-book/finish-pva.jpg" alt="Spot UV test with clear PVA glue">
+      <img src="images/from-the-book/finish-decoupage.jpg" alt="Spot UV test with gloss decoupage medium">
+      <img src="images/from-the-book/finish-modpodge.jpg" alt="Spot UV test with Mod Podge">
     </div>
-    <div class="persona">
-      <h3>Avery <span>25</span></h3>
-      <ul><li>Games developer</li><li>Lives in Bristol</li><li>Autistic</li></ul>
-      <p>Wants to book a venue for a friend's birthday party with catering. Can become overwhelmed easily and would rather not phone or email strangers to get answers.</p>
-      <p class="need"><b>Needs statement</b>Needs a way to know the policies on bringing food and drinks to a venue, so that she can book a birthday party without contacting other people for information.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 04 PROCESS ============ -->
-<section>
-  <div class="block reveal">
-    <div><span class="num">04</span><h2>Process</h2></div>
-    <div class="block-body">
-      <p>We studied how successful apps handle search, filters and booking. From Airbnb we took the idea of a map view, which a tutor also suggested, so users can see at a glance how far away a venue is instead of reading it in small print. From Vinted we took quick filter toggles at the top of the results, with a separate panel for more detailed filtering.</p>
-      <p>We then sketched in rapid rounds: four frames each, discuss what works, sketch again. The strongest ideas became a low-fidelity flow in Figma, with as few steps and pages as possible.</p>
-    </div>
-  </div>
-  <div class="steps reveal">
-    <div class="step">
-      <div class="media white"><img src="images/get-a-room/workshop-needs.jpg" alt="Sticky notes developing Hunainza's needs statement"></div>
-      <span class="num">01</span><h3>Workshop</h3>
-      <p>Needs statements and user journeys mapped out on the whiteboard.</p>
-    </div>
-    <div class="step">
-      <div class="media white"><img src="images/get-a-room/wireframes-catering.jpg" alt="Pencil wireframes for Avery's catering flow"></div>
-      <span class="num">02</span><h3>Sketch</h3>
-      <p>Quick pencil wireframes, four frames at a time.</p>
-    </div>
-    <div class="step">
-      <div class="media white"><img src="images/get-a-room/lofi-1.jpg" alt="Grey low-fidelity Figma screens"></div>
-      <span class="num">03</span><h3>Lo-fi</h3>
-      <p>The best sketches turned into a grey-box golden path in Figma.</p>
-    </div>
-    <div class="step">
-      <div class="media white"><img src="images/get-a-room/home-screen.jpg" alt="Final home screen of the Get a room! app"></div>
-      <span class="num">04</span><h3>Hi-fi</h3>
-      <p>Full colour, type and components, tested for accessibility.</p>
-    </div>
-  </div>
-  <div class="gallery reveal" style="margin-top: clamp(2.5rem, 5vw, 4rem);">
-    <figure>
-      <div class="media auto"><img src="images/get-a-room/wireframes.jpg" alt="Pencil wireframe sketches of the home page, venue page, catering options and filter screens"></div>
-      <figcaption>Wireframe sketches: home page, venue info and catering (left); search and filters for Hunainza (right).</figcaption>
-    </figure>
-    <figure>
-      <div class="media auto"><img src="images/get-a-room/lofi-2.jpg" alt="Low-fidelity Figma flow of the booking and checkout screens"></div>
-      <figcaption>Low-fidelity checkout flow in Figma: date and time, details, payment, catering, review, confirmed.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ 05 FINAL DESIGN ============ -->
-<section>
-  <div class="block reveal">
-    <div><span class="num">05</span><h2>Final Design</h2></div>
-    <div class="block-body">
-      <p>Each persona has a <strong>golden path</strong>, the simplest route through the app to what they need, with key details like age limits and catering shown up front.</p>
-    </div>
-  </div>
-
-  <h3 class="sub reveal"><small>Prototype</small>Walkthrough of the Figma prototype</h3>
-  <figure class="reveal">
-    <div class="video-panel">
-      <video controls playsinline preload="metadata" poster="images/get-a-room/walkthrough-poster.jpg">
-        <source src="images/get-a-room/walkthrough.mp4" type="video/mp4">
-      </video>
-    </div>
+    <figcaption>Finish tests: PVA, decoupage medium and Mod Podge.</figcaption>
   </figure>
-
-  <h3 class="sub reveal"><small>Golden path 1</small>Hunainza books an 18+ poker night</h3>
-  <figure class="reveal">
-    <div class="phones five">
-      <img src="images/get-a-room/phones/hunainza-1.jpg" alt="Choose a venue type: nightclub, community hall, grand hall, lounge, pub or sports hall">
-      <img src="images/get-a-room/phones/hunainza-2.jpg" alt="Choose amenities such as TV, catering, wheelchair access and 18+">
-      <img src="images/get-a-room/phones/hunainza-3.jpg" alt="Recommended venues with a top pick">
-      <img src="images/get-a-room/phones/hunainza-4.jpg" alt="City Lights Club venue page with 18+, bar and wheelchair access tags">
-      <img src="images/get-a-room/phones/hunainza-5.jpg" alt="Community poker night event page with viewer stats">
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="phones photos">
+      <img src="images/from-the-book/photo-front.jpg" alt="The finished printed book, front cover">
+      <img src="images/from-the-book/photo-back.jpg" alt="The finished printed book, back cover">
+      <img src="images/from-the-book/photo-spine.jpg" alt="The finished book held to show the spine">
     </div>
-  </figure>
-
-  <h3 class="sub reveal"><small>Golden path 2</small>Avery books a birthday party with catering</h3>
-  <figure class="reveal">
-    <div class="phones">
-      <img src="images/get-a-room/phones/avery-1.jpg" alt="Search results for 'hall for party' with quick filter toggles">
-      <img src="images/get-a-room/phones/avery-2.jpg" alt="Detailed filter panel with sort options and amenities">
-      <img src="images/get-a-room/phones/avery-3.jpg" alt="Booking details: date, time, guests and extras">
-      <img src="images/get-a-room/phones/avery-4.jpg" alt="Catering packages with allergy questions">
-    </div>
+    <figcaption>The finished book.</figcaption>
   </figure>
 </section>
 
-<!-- ============ 06 INCLUSIVE DESIGN ============ -->
-<section class="tinted">
-  <div class="block reveal">
-    <div><span class="num">06</span><h2>Inclusive Design</h2></div>
-    <div class="block-body">
-      <p><strong>Colour.</strong> Blue is the main colour because it's linked with calm and reliability, which helps when you're making decisions, and it stays readable for people with colour blindness. Neutral greys keep the background quiet, and green marks successful actions.</p>
-      <p><strong>Testing.</strong> We checked the design in Stark under all four main types of colour blindness, as well as for contrast and type size.</p>
-      <p><strong>Type.</strong> IBM Plex Serif for titles and headings, DM Sans for body text and labels, because its tall x-height stays legible at small sizes. We kept to two typefaces to avoid visual overload.</p>
-    </div>
-  </div>
-  <div class="gallery reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
-    <div class="grid-2">
-      <figure>
-        <div class="media square white pad-sm"><img src="images/get-a-room/palette.jpg" alt="The app's colour palette: brand blues, neutrals, success greens, warning yellows and danger pinks"></div>
-        <figcaption>Colour palette.</figcaption>
-      </figure>
-      <figure>
-        <div class="media square white pad-sm"><img src="images/get-a-room/type.jpg" alt="Type scale using IBM Plex Serif and DM Sans"></div>
-        <figcaption>Type scale: IBM Plex Serif and DM Sans.</figcaption>
-      </figure>
-    </div>
-    <figure>
-      <div class="media auto pad"><img src="images/get-a-room/stark.jpg" alt="The home screen shown four times under different colour-blindness filters"></div>
-      <figcaption>Home screen tested in Stark: protanopia, achromatopsia, deuteranopia and tritanopia.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ 07 OUTCOME ============ -->
+<!-- ============ 06 REFLECTION ============ -->
 <section>
   <div class="block reveal">
-    <div><span class="num">07</span><h2>Outcome &amp; Reflection</h2></div>
+    <div><span class="num">06</span><h2>Reflection</h2></div>
     <div class="block-body">
-      <p>The project produced a research report, a pitch to the council, a clickable Figma prototype with a recorded walkthrough, and my own illustrated report on the design process.</p>
-      <p>The IBM workshop was the turning point. Mapping everyone affected by a booking showed problems we wouldn't otherwise have spotted. If I took the app further, I'd make the secondary buttons bigger, as I did with the main confirm buttons, to better support users with mobility issues.</p>
+      <p>Looking back, the PVA wasn't shiny enough. Mod Podge, or clear nail polish as some classmates used, would have given a stronger spot UV effect. I'd also take more care with the making: more precise trimming so the cover lines up with the text block, and laminating the cover so the black doesn't rub or crack at the folds.</p>
+      <p>This project, together with a studio visit to DK, made me seriously consider a career in editorial design. I'm already using these skills on the student union magazine.</p>
       <div class="highlights">
-        <div><strong>2</strong><span>personas, each with their own golden path</span></div>
-        <div><strong>4</strong><span>types of colour blindness tested in Stark</span></div>
-        <div><strong>1 in 7</strong><span>over-65s can't turn on a device, the statistic that shaped the design</span></div>
+        <div><strong>4</strong><span>serif typefaces tested in print</span></div>
+        <div><strong>9</strong><span>cover versions before the final design</span></div>
+        <div><strong>3</strong><span>hand-made spot UV finishes tested</span></div>
       </div>
+      <p class="credit">Original book: <em>From the Book to the Streets</em>, edited by Julia Blume, Pierre Pané-Farré and Fred Smeijers (Hochschule für Grafik und Buchkunst Leipzig, 2014). The essays and archive images belong to their authors. This redesign is a student project.</p>
     </div>
   </div>
 </section>
@@ -634,10 +579,10 @@
 <!-- ============ NEXT ============ -->
 <section>
   <div class="next reveal">
-    <a href="from-the-book.html">
+    <a href="index.html#work">
       <div>
-        <p class="eyebrow">Next project</p>
-        <span class="next-title">From the Book to the Streets</span>
+        <p class="eyebrow">Keep looking</p>
+        <span class="next-title">All work</span>
       </div>
       <span class="arrow">→</span>
     </a>
