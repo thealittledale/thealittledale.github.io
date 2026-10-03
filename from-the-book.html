@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From the Book to the Streets — Thea Littledale</title>
+<meta name="description" content="Cover and interior redesign of From the Book to the Streets, an essay collection on typography in public spaces. Editorial case study by Thea Littledale.">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #16181b;
+    --paper: #f2f3ee;
+    --paper-dim: #e7e9df;
+    --accent: #1854d6;
+    --pink: #e63888;
+    --moss: #4b5e52;
+    --line: rgba(22,24,27,0.16);
+    --serif: 'Fraunces', 'Iowan Old Style', serif;
+    --sans: 'Archivo', 'Helvetica Neue', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection{ background: var(--accent); color: var(--paper); }
+
+  /* paper grain texture */
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events:none;
+    z-index: 500;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- custom cursor ---------- */
+  .cursor{
+    position: fixed;
+    top:0; left:0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%,-50%);
+    transition: width .25s ease, height .25s ease, background .25s ease, border .25s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor.hover{
+    width: 64px; height: 64px;
+    background: transparent;
+    border: 1px solid var(--paper);
+  }
+  @media (hover: none){ .cursor{ display:none; } body{ cursor:auto; } }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky; top:0;
+    z-index: 100;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem);
+    background: rgba(243,237,225,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo{
+    font-family: var(--mono);
+    font-weight:700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+  .logo span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: clamp(1.2rem, 3vw, 2.4rem); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .nav-links a{ position:relative; padding-bottom: 3px; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background: var(--accent); transition: width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  section{ padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3.5rem); position: relative; }
+
+  /* small mono label with a rule before it, as on the homepage */
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display:flex; align-items:center; gap: 0.8rem;
+  }
+  .eyebrow::before{ content:""; width: 34px; height:1px; background: var(--moss); }
+
+  /* grey helper text explaining what to write; delete it as you fill in */
+  .hint{ color: #8a8f86; font-style: italic; }
+
+  /* ---------- case study header ---------- */
+  .cs-head{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+  .back{
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    display:inline-flex; gap: 0.5rem; margin-bottom: clamp(2rem, 6vw, 4rem);
+    opacity: 0.7; transition: opacity .3s ease;
+  }
+  .back:hover{ opacity: 1; color: var(--accent); }
+  .cs-head .eyebrow{ margin-bottom: 1.4rem; opacity:0; animation: rise .8s ease forwards .1s; }
+  .cs-title{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    opacity:0; animation: rise .9s ease forwards .25s;
+  }
+  .cs-title em{ font-style: italic; font-weight: 400; color: var(--pink); }
+  .cs-summary{
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 40ch;
+    margin-top: 1.6rem;
+    color: #3a352b;
+    opacity:0; animation: rise .9s ease forwards .4s;
+  }
+
+  /* project facts row */
+  .facts{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    opacity:0; animation: rise .9s ease forwards .55s;
+  }
+  @media (max-width: 760px){ .facts{ grid-template-columns: 1fr 1fr; } }
+  .facts dt{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--moss); margin-bottom: 0.4rem;
+  }
+  .facts dd{ font-size: 0.95rem; line-height: 1.5; }
+
+  /* ---------- image boxes ---------- */
+  .media{
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    aspect-ratio: 16/9;
+  }
+  .media.tall{ aspect-ratio: 4/5; }
+  .media.square{ aspect-ratio: 1/1; }
+  .media img, .media video{ width:100%; height:100%; object-fit: cover; display:block; }
+
+  /* placeholder: riso-style block, same look as the homepage tiles */
+  .ph{
+    position:absolute; inset:0;
+    background: var(--accent);
+    display:flex; align-items:flex-end;
+    padding: 1.2rem;
+    overflow:hidden;
+  }
+  .ph::after{
+    content:"";
+    position:absolute; inset: -14%;
+    background-image: radial-gradient(var(--pink) 32%, transparent 33%);
+    background-size: 15px 15px;
+    opacity: 0.5;
+    transform: rotate(7deg);
+  }
+  .ph.alt{ background: var(--ink); }
+  .ph.alt::after{ background-image: radial-gradient(#f0b429 32%, transparent 33%); transform: rotate(-6deg); }
+  .ph.moss{ background: var(--moss); }
+  .ph.moss::after{ background-image: radial-gradient(var(--paper) 32%, transparent 33%); transform: rotate(-4deg); }
+  .ph span{
+    position: relative; z-index: 1;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(22,24,27,0.55);
+    padding: 0.35rem 0.6rem; border-radius: 2px;
+  }
+
+  figcaption{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em;
+    color: var(--moss); margin-top: 0.7rem;
+  }
+
+  .hero-media{ padding-top: 0; }
+
+  /* ---------- text sections: label left, words right ---------- */
+  .block{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 760px){ .block{ grid-template-columns: 1fr; } }
+  .block h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.1;
+  }
+  .block .num{
+    display:block;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .block-body p{
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: #3a352b;
+    max-width: 62ch;
+    margin-bottom: 1.2rem;
+  }
+  .block-body p:last-child{ margin-bottom: 0; }
+
+  /* pull quote */
+  .quote{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+    line-height: 1.3;
+    max-width: 28ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .quote .accent{ color: var(--pink); }
+  .quote-src{
+    display:block; text-align:center; margin-top: 1.2rem;
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss);
+  }
+
+  /* process steps */
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 760px){ .steps{ grid-template-columns: 1fr 1fr; } }
+  .step .media{ aspect-ratio: 4/3; margin-bottom: 1rem; }
+  .step .num{ font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
+  .step h3{ font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin: 0.4rem 0 0.4rem; }
+  .step p{ font-size: 0.88rem; color: #4a4438; line-height: 1.55; }
+
+  /* image grids */
+  .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); }
+  .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.4vw, 1.75rem); }
+  @media (max-width: 760px){ .grid-2, .grid-3{ grid-template-columns: 1fr; } }
+  .gallery > * + *{ margin-top: clamp(1rem, 2.4vw, 1.75rem); }
+
+  /* outcome highlights */
+  .highlights{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 760px){ .highlights{ grid-template-columns: 1fr; } }
+  .highlights div{ border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .highlights strong{
+    display:block; font-family: var(--serif); font-weight: 900; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1;
+    color: var(--accent);
+  }
+  .highlights span{ display:block; margin-top: 0.5rem; font-size: 0.9rem; color: #4a4438; line-height: 1.5; }
+
+  .tinted{ background: var(--paper-dim); }
+
+  /* ---------- next project ---------- */
+  .next{
+    display:flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+  .next .eyebrow{ margin-bottom: 0.8rem; }
+  .next-title{
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.95;
+    transition: color .3s ease;
+  }
+  .next a:hover .next-title{ color: var(--accent); }
+  .next .arrow{ font-family: var(--serif); font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.95; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .next a:hover .arrow{ transform: translateX(10px); }
+  .next a{ display:flex; align-items:flex-end; gap: 1.2rem; }
+
+  /* ---------- contact + footer (same as homepage) ---------- */
+  .contact{
+    background: var(--ink);
+    color: var(--paper);
+    text-align:center;
+    padding: clamp(4rem, 12vw, 9rem) clamp(1.25rem, 5vw, 3.5rem);
+  }
+  .contact .eyebrow{ color: var(--pink); justify-content:center; margin-bottom: 1.6rem; }
+  .contact .eyebrow::before{ background: var(--pink); }
+  .contact h2{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    max-width: 18ch;
+    margin: 0 auto 2rem;
+    line-height: 1.15;
+  }
+  .contact-email{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    display:inline-block;
+    position: relative;
+    padding-bottom: 0.3rem;
+  }
+  .contact-email::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .contact-email:hover::after{ transform: scaleX(1); }
+
+  footer{
+    background: var(--ink);
+    color: rgba(243,237,225,0.5);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap: 0.6rem;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem) 1.8rem;
+    border-top: 1px solid rgba(243,237,225,0.14);
+  }
+  footer a:hover{ color: var(--paper); }
+
+  @keyframes rise{ from{ opacity:0; transform: translateY(18px);} to{ opacity:1; transform: translateY(0);} }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+
+  /* ---------- extras for this case study ---------- */
+  /* report figures keep their own shape instead of being cropped */
+  .media.auto{ aspect-ratio: auto; background: #fff; }
+  .media.auto img{ height: auto; object-fit: contain; }
+  .media.white{ background: #fff; }
+  .media.pad-sm{ padding: clamp(1.75rem, 4.5vw, 3.5rem); }
+  .media.pad{ padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.5rem, 7vw, 6rem); }
+  .media.white img{ object-fit: contain; }
+
+  .sub{
+    font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 1rem;
+  }
+  .sub small{
+    display:block; font-family: var(--mono); font-weight: 400; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--moss); margin-bottom: 0.4rem;
+  }
+
+  /* persona cards */
+  .personas{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); margin-top: clamp(2rem, 4vw, 3rem); }
+  @media (max-width: 760px){ .personas{ grid-template-columns: 1fr; } }
+
+  /* phone screens in a row on a white panel */
+  .phones{
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1rem, 4vw, 4rem);
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
+    gap: clamp(1.5rem, 3.5vw, 3rem);
+  }
+  .phones img{ width: clamp(130px, 17vw, 230px); height: auto; display: block; }
+  .phones.five img{ width: clamp(130px, 13vw, 185px); }
+
+  /* walkthrough video: black panel so the video's black edges disappear */
+  .video-panel{
+    background: #000;
+    border-radius: 3px;
+    padding: clamp(2rem, 6vw, 4.5rem) 1rem;
+    display: flex; justify-content: center;
+  }
+  .video-panel video{ width: clamp(220px, 28vw, 340px); height: auto; display: block; }
+  .persona{ background: var(--paper); border: 1px solid var(--line); border-radius: 3px; padding: clamp(1.4rem, 3vw, 2rem); }
+  .persona h3{ font-family: var(--serif); font-weight: 900; font-size: clamp(1.8rem, 3.4vw, 2.4rem); line-height: 1; }
+  .persona h3 span{ font-weight: 400; font-style: italic; color: var(--pink); }
+  .persona ul{ list-style: none; margin: 1rem 0 1.2rem; display:flex; flex-wrap: wrap; gap: 0.5rem; }
+  .persona li{
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.35rem 0.7rem; border: 1px solid var(--line); border-radius: 100px;
+  }
+  .persona p{ font-size: 0.95rem; line-height: 1.65; color: #3a352b; }
+  .persona .need{ margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--serif); font-style: italic; font-size: 1.02rem; line-height: 1.5; color: var(--ink); }
+  .persona .need b{ display:block; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+
+  /* ---------- extras for this case study ---------- */
+  .phones.covers img{ width: clamp(120px, 15vw, 210px); box-shadow: 0 8px 24px rgba(22,24,27,0.18); }
+  .phones.photos img{ width: clamp(140px, 20vw, 280px); border-radius: 2px; }
+  .spreads{
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 6vw, 5rem);
+    display: grid; gap: clamp(2rem, 5vw, 4rem);
+  }
+  .spreads img{ width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(22,24,27,0.16); }
+  .credit{ font-size: 0.82rem; color: #6b6f68; line-height: 1.6; max-width: 70ch; margin-top: 2.5rem; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a class="logo" href="index.html">THEA<span>·</span>LITTLEDALE</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HEADER ============ -->
+<section class="cs-head">
+  <a class="back" href="index.html#work">← All work</a>
+  <p class="eyebrow">Case Study 02 — Editorial Design</p>
+  <h1 class="cs-title">From the Book<br><em>to the Streets</em></h1>
+  <p class="cs-summary">A redesign of the cover and interior of an essay collection on lettering and type, from choosing a typeface and grid through to a hand-finished, bound copy.</p>
+  <dl class="facts">
+    <div><dt>Module</dt><dd>TG2ED, Editorial Design</dd></div>
+    <div><dt>Role</dt><dd>Cover, interior layout, typesetting &amp; binding</dd></div>
+    <div><dt>Tools</dt><dd>InDesign</dd></div>
+    <div><dt>Timeline</dt><dd>Year 2, 2025</dd></div>
+  </dl>
+</section>
+
+<!-- ============ HERO IMAGE ============ -->
+<section class="hero-media">
+  <figure class="reveal">
+    <div class="media auto"><img src="images/from-the-book/cover-flat.jpg" alt="The full book jacket: back cover blurb, spine and front cover with large yellow stacked title on dark grey"></div>
+  </figure>
+</section>
+
+<!-- ============ 01 THE BRIEF ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">01</span><h2>The Brief</h2></div>
+    <div class="block-body">
+      <p>Redesign <em>From the Book to the Streets</em>, a collection of essays on typography in public spaces, published by the Hochschule für Grafik und Buchkunst Leipzig. The project covered a typographic cover, the interior layout of a chapter, the prelims and endmatter, and finally printing and binding a finished copy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 TYPE & GRID ============ -->
+<section class="tinted">
+  <div class="block reveal">
+    <div><span class="num">02</span><h2>Type &amp; Grid</h2></div>
+    <div class="block-body">
+      <p>I set the same text in four serif typefaces, Inria Serif, Haboro Serif, Noto Serif and Capitolium, to compare them on the printed page rather than on screen. Capitolium won. Its large x-height and condensed width keep long passages readable, and it has the small caps, ligatures and old-style numerals a scholarly text needs.</p>
+      <p>The grid is 6&nbsp;×&nbsp;3, with a wide outer margin for captions and footnotes at the foot of the page. At first I set the footnotes in a different typeface, but feedback showed they looked disconnected from the text, so I changed them to Capitolium at a smaller size. Contrast should support the hierarchy, not break it.</p>
+    </div>
+  </div>
+  <div class="grid-2 reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <figure>
+      <div class="media square white pad-sm"><img src="images/from-the-book/type-specimen.jpg" alt="Type specimen sheet set in Capitolium"></div>
+      <figcaption>Type specimen in Capitolium.</figcaption>
+    </figure>
+    <figure>
+      <div class="media square white pad-sm"><img src="images/from-the-book/grid.jpg" alt="Test page on a 6 by 3 grid with margin captions"></div>
+      <figcaption>Testing the 6 × 3 grid in InDesign.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 03 THE COVER ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">03</span><h2>The Cover</h2></div>
+    <div class="block-body">
+      <p>I studied typographic covers, from post-war poetry covers inspired by Berthold Wolpe to the work of David Pearson, and designed nine versions with the title as the only image. I started with the classic red and white, then moved to black with red, orange and yellow. These combinations felt more distinctive and suggest road signs, which ties in with the book's subject of lettering on the street.</p>
+      <p>The final cover stacks the title in large yellow type on dark grey, with a bright yellow inside cover so the colour carries through when you open the book.</p>
+    </div>
+  </div>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="phones covers">
+      <img src="images/from-the-book/cover-v1.jpg" alt="Cover version 1: white title on red">
+      <img src="images/from-the-book/cover-v4.jpg" alt="Cover version 4: large stacked white title on red">
+      <img src="images/from-the-book/cover-v5.jpg" alt="Cover version 5: orange stacked title on black">
+      <img src="images/from-the-book/cover-v6.jpg" alt="Cover version 6, the final design: yellow stacked title on black">
+    </div>
+    <figcaption>From first to final: versions 1, 4, 5 and 6.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ QUOTE ============ -->
+<section class="tinted">
+  <p class="quote reveal">“Match the intensity of the title with the <span class="accent">sizing, tone and temper</span> of the book.”</p>
+  <span class="quote-src reveal">— David Pearson, guest lecture</span>
+</section>
+
+<!-- ============ 04 THE INTERIOR ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">04</span><h2>The Interior</h2></div>
+    <div class="block-body">
+      <p>Body text runs across two columns, with captions in the margin and footnotes below. The hardest part was keeping every image and footnote on the same spread as its reference, while still giving the archive images enough room. I learned that the designer is responsible for treating images with respect: sizing them properly and never cropping them.</p>
+      <p>The contents page uses tabs and leaders for clean alignment, and the bibliography picks out authors' names in bold.</p>
+    </div>
+  </div>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="spreads">
+      <img src="images/from-the-book/spread-opener.jpg" alt="Chapter opening spread for Rob Banham's essay">
+      <img src="images/from-the-book/spread-1.jpg" alt="Spread with body text and two nineteenth-century theatre posters">
+      <img src="images/from-the-book/spread-3.jpg" alt="Spread with lottery tickets and a large red Astley's circus poster">
+      <img src="images/from-the-book/spread-4.jpg" alt="Spread from the stencil dies chapter with tools and a portrait">
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 05 PRINT & FINISH ============ -->
+<section class="tinted">
+  <div class="block reveal">
+    <div><span class="num">05</span><h2>Print &amp; Finish</h2></div>
+    <div class="block-body">
+      <p>To make the yellow title shine like spot UV, I tested three clear finishes by hand: PVA glue, gloss decoupage medium and Mod Podge. I chose PVA because it left no brush marks. Then I printed, trimmed and bound the book myself.</p>
+    </div>
+  </div>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="phones photos">
+      <img src="images/from-the-book/finish-pva.jpg" alt="Spot UV test with clear PVA glue">
+      <img src="images/from-the-book/finish-decoupage.jpg" alt="Spot UV test with gloss decoupage medium">
+      <img src="images/from-the-book/finish-modpodge.jpg" alt="Spot UV test with Mod Podge">
+    </div>
+    <figcaption>Finish tests: PVA, decoupage medium and Mod Podge.</figcaption>
+  </figure>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="phones photos">
+      <img src="images/from-the-book/photo-front.jpg" alt="The finished printed book, front cover">
+      <img src="images/from-the-book/photo-back.jpg" alt="The finished printed book, back cover">
+      <img src="images/from-the-book/photo-spine.jpg" alt="The finished book held to show the spine">
+    </div>
+    <figcaption>The finished book.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 06 REFLECTION ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">06</span><h2>Reflection</h2></div>
+    <div class="block-body">
+      <p>Looking back, the PVA wasn't shiny enough. Mod Podge, or clear nail polish as some classmates used, would have given a stronger spot UV effect. I'd also take more care with the making: more precise trimming so the cover lines up with the text block, and laminating the cover so the black doesn't rub or crack at the folds.</p>
+      <p>This project, together with a studio visit to DK, made me seriously consider a career in editorial design. I'm already using these skills on the student union magazine.</p>
+      <div class="highlights">
+        <div><strong>4</strong><span>serif typefaces tested in print</span></div>
+        <div><strong>9</strong><span>cover versions before the final design</span></div>
+        <div><strong>3</strong><span>hand-made spot UV finishes tested</span></div>
+      </div>
+      <p class="credit">Original book: <em>From the Book to the Streets</em>, edited by Julia Blume, Pierre Pané-Farré and Fred Smeijers (Hochschule für Grafik und Buchkunst Leipzig, 2014). The essays and archive images belong to their authors. This redesign is a student project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<section>
+  <div class="next reveal">
+    <a href="index.html#work">
+      <div>
+        <p class="eyebrow">Keep looking</p>
+        <span class="next-title">All work</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <p class="eyebrow">Get in touch</p>
+  <h2 class="reveal">Have a project in mind? I'd love to hear about it.</h2>
+  <a class="contact-email" href="mailto:thealittledale@gmail.com">thealittledale@gmail.com</a>
+</section>
+
+<footer>
+  <span>© 2026 Thea Littledale. All rights reserved.</span>
+  <span>Designed by Thea, built using Claude Code, hosted on GitHub Pages.</span>
+</footer>
+
+<script>
+  // custom cursor
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, .media').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
