@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Title — Thea Littledale</title>
+<meta name="description" content="Case study by Thea Littledale, graphic design student in Bristol, UK.">
+
+<!--
+  ============================================================
+  CASE STUDY TEMPLATE
+  ============================================================
+  To make a new case study:
+  1. Copy this file and rename it after the project,
+     e.g. get-a-room.html (lowercase, hyphens, no spaces).
+  2. Replace everything marked EDIT: below. The grey helper text in
+     each section says what to write there.
+  3. Images: put them in the images/ folder. In each placeholder box,
+     replace the <div class="ph">…</div> with
+        <img src="images/your-image.jpg" alt="Short description">
+     The image fills the box automatically.
+  4. Delete any section you don't need. Every section stands alone.
+  5. On index.html, point that project's "View Case Study" link
+     (href="case-study.html") at your new file.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #16181b;
+    --paper: #f2f3ee;
+    --paper-dim: #e7e9df;
+    --accent: #1854d6;
+    --pink: #e63888;
+    --moss: #4b5e52;
+    --line: rgba(22,24,27,0.16);
+    --serif: 'Fraunces', 'Iowan Old Style', serif;
+    --sans: 'Archivo', 'Helvetica Neue', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection{ background: var(--accent); color: var(--paper); }
+
+  /* paper grain texture */
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events:none;
+    z-index: 500;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- custom cursor ---------- */
+  .cursor{
+    position: fixed;
+    top:0; left:0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%,-50%);
+    transition: width .25s ease, height .25s ease, background .25s ease, border .25s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor.hover{
+    width: 64px; height: 64px;
+    background: transparent;
+    border: 1px solid var(--paper);
+  }
+  @media (hover: none){ .cursor{ display:none; } body{ cursor:auto; } }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky; top:0;
+    z-index: 100;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem);
+    background: rgba(243,237,225,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo{
+    font-family: var(--mono);
+    font-weight:700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+  .logo span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: clamp(1.2rem, 3vw, 2.4rem); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .nav-links a{ position:relative; padding-bottom: 3px; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background: var(--accent); transition: width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  section{ padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3.5rem); position: relative; }
+
+  /* small mono label with a rule before it, as on the homepage */
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display:flex; align-items:center; gap: 0.8rem;
+  }
+  .eyebrow::before{ content:""; width: 34px; height:1px; background: var(--moss); }
+
+  /* grey helper text explaining what to write; delete it as you fill in */
+  .hint{ color: #8a8f86; font-style: italic; }
+
+  /* ---------- case study header ---------- */
+  .cs-head{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+  .back{
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    display:inline-flex; gap: 0.5rem; margin-bottom: clamp(2rem, 6vw, 4rem);
+    opacity: 0.7; transition: opacity .3s ease;
+  }
+  .back:hover{ opacity: 1; color: var(--accent); }
+  .cs-head .eyebrow{ margin-bottom: 1.4rem; opacity:0; animation: rise .8s ease forwards .1s; }
+  .cs-title{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    opacity:0; animation: rise .9s ease forwards .25s;
+  }
+  .cs-title em{ font-style: italic; font-weight: 400; color: var(--pink); }
+  .cs-summary{
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 40ch;
+    margin-top: 1.6rem;
+    color: #3a352b;
+    opacity:0; animation: rise .9s ease forwards .4s;
+  }
+
+  /* project facts row */
+  .facts{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    opacity:0; animation: rise .9s ease forwards .55s;
+  }
+  @media (max-width: 760px){ .facts{ grid-template-columns: 1fr 1fr; } }
+  .facts dt{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--moss); margin-bottom: 0.4rem;
+  }
+  .facts dd{ font-size: 0.95rem; line-height: 1.5; }
+
+  /* ---------- image boxes ---------- */
+  .media{
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    aspect-ratio: 16/9;
+  }
+  .media.tall{ aspect-ratio: 4/5; }
+  .media.square{ aspect-ratio: 1/1; }
+  .media img, .media video{ width:100%; height:100%; object-fit: cover; display:block; }
+
+  /* placeholder: riso-style block, same look as the homepage tiles */
+  .ph{
+    position:absolute; inset:0;
+    background: var(--accent);
+    display:flex; align-items:flex-end;
+    padding: 1.2rem;
+    overflow:hidden;
+  }
+  .ph::after{
+    content:"";
+    position:absolute; inset: -14%;
+    background-image: radial-gradient(var(--pink) 32%, transparent 33%);
+    background-size: 15px 15px;
+    opacity: 0.5;
+    transform: rotate(7deg);
+  }
+  .ph.alt{ background: var(--ink); }
+  .ph.alt::after{ background-image: radial-gradient(#f0b429 32%, transparent 33%); transform: rotate(-6deg); }
+  .ph.moss{ background: var(--moss); }
+  .ph.moss::after{ background-image: radial-gradient(var(--paper) 32%, transparent 33%); transform: rotate(-4deg); }
+  .ph span{
+    position: relative; z-index: 1;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(22,24,27,0.55);
+    padding: 0.35rem 0.6rem; border-radius: 2px;
+  }
+
+  figcaption{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em;
+    color: var(--moss); margin-top: 0.7rem;
+  }
+
+  .hero-media{ padding-top: 0; }
+
+  /* ---------- text sections: label left, words right ---------- */
+  .block{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 760px){ .block{ grid-template-columns: 1fr; } }
+  .block h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.1;
+  }
+  .block .num{
+    display:block;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .block-body p{
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: #3a352b;
+    max-width: 62ch;
+    margin-bottom: 1.2rem;
+  }
+  .block-body p:last-child{ margin-bottom: 0; }
+
+  /* pull quote */
+  .quote{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+    line-height: 1.3;
+    max-width: 28ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .quote .accent{ color: var(--pink); }
+  .quote-src{
+    display:block; text-align:center; margin-top: 1.2rem;
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss);
+  }
+
+  /* process steps */
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 760px){ .steps{ grid-template-columns: 1fr 1fr; } }
+  .step .media{ aspect-ratio: 4/3; margin-bottom: 1rem; }
+  .step .num{ font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
+  .step h3{ font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin: 0.4rem 0 0.4rem; }
+  .step p{ font-size: 0.88rem; color: #4a4438; line-height: 1.55; }
+
+  /* image grids */
+  .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); }
+  .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.4vw, 1.75rem); }
+  @media (max-width: 760px){ .grid-2, .grid-3{ grid-template-columns: 1fr; } }
+  .gallery > * + *{ margin-top: clamp(1rem, 2.4vw, 1.75rem); }
+
+  /* outcome highlights */
+  .highlights{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 760px){ .highlights{ grid-template-columns: 1fr; } }
+  .highlights div{ border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .highlights strong{
+    display:block; font-family: var(--serif); font-weight: 900; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1;
+    color: var(--accent);
+  }
+  .highlights span{ display:block; margin-top: 0.5rem; font-size: 0.9rem; color: #4a4438; line-height: 1.5; }
+
+  .tinted{ background: var(--paper-dim); }
+
+  /* ---------- next project ---------- */
+  .next{
+    display:flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+  .next .eyebrow{ margin-bottom: 0.8rem; }
+  .next-title{
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.95;
+    transition: color .3s ease;
+  }
+  .next a:hover .next-title{ color: var(--accent); }
+  .next .arrow{ font-family: var(--serif); font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.95; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .next a:hover .arrow{ transform: translateX(10px); }
+  .next a{ display:flex; align-items:flex-end; gap: 1.2rem; }
+
+  /* ---------- contact + footer (same as homepage) ---------- */
+  .contact{
+    background: var(--ink);
+    color: var(--paper);
+    text-align:center;
+    padding: clamp(4rem, 12vw, 9rem) clamp(1.25rem, 5vw, 3.5rem);
+  }
+  .contact .eyebrow{ color: var(--pink); justify-content:center; margin-bottom: 1.6rem; }
+  .contact .eyebrow::before{ background: var(--pink); }
+  .contact h2{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    max-width: 18ch;
+    margin: 0 auto 2rem;
+    line-height: 1.15;
+  }
+  .contact-email{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    display:inline-block;
+    position: relative;
+    padding-bottom: 0.3rem;
+  }
+  .contact-email::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .contact-email:hover::after{ transform: scaleX(1); }
+
+  footer{
+    background: var(--ink);
+    color: rgba(243,237,225,0.5);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap: 0.6rem;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem) 1.8rem;
+    border-top: 1px solid rgba(243,237,225,0.14);
+  }
+  footer a:hover{ color: var(--paper); }
+
+  @keyframes rise{ from{ opacity:0; transform: translateY(18px);} to{ opacity:1; transform: translateY(0);} }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a class="logo" href="index.html">THEA<span>·</span>LITTLEDALE</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HEADER ============ -->
+<section class="cs-head">
+  <a class="back" href="index.html#work">← All work</a>
+  <p class="eyebrow">Case Study 01 — Category</p>
+  <!-- EDIT: project number and category, e.g. "Case Study 01 — UX & App Design" -->
+  <h1 class="cs-title">Project<br><em>Title</em></h1>
+  <!-- EDIT: project name. Wrap the second word or line in <em> for the pink italic, or leave it out -->
+  <p class="cs-summary"><span class="hint">One or two sentences: what the project is, who it's for, and what it set out to do.</span></p>
+  <!-- EDIT: short summary -->
+  <dl class="facts">
+    <div><dt>Role</dt><dd><span class="hint">e.g. UX research, UI design</span></dd></div>
+    <div><dt>Tools</dt><dd><span class="hint">e.g. Figma, InDesign</span></dd></div>
+    <div><dt>Timeline</dt><dd><span class="hint">e.g. 12 weeks, 2026</span></dd></div>
+    <div><dt>Team</dt><dd><span class="hint">e.g. Solo, or group of 3</span></dd></div>
+  </dl>
+  <!-- EDIT: project facts. Change the labels too if others suit better (Client, Module, Brief…) -->
+</section>
+
+<!-- ============ HERO IMAGE ============ -->
+<section class="hero-media">
+  <figure class="reveal">
+    <div class="media">
+      <div class="ph"><span>Hero image — 16:9 — your strongest final piece</span></div>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 01 THE BRIEF ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">01</span><h2>The Brief</h2></div>
+    <div class="block-body">
+      <p><span class="hint">What were you asked to do, and by whom (module, client, competition)? Keep it to the essentials: the problem, the audience and any constraints.</span></p>
+      <p><span class="hint">Why did it matter? One or two sentences on what made this brief interesting or difficult.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 RESEARCH ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">02</span><h2>Research &amp; Insight</h2></div>
+    <div class="block-body">
+      <p><span class="hint">What did you look into: users, competitors, references, interviews? Summarise the findings that shaped your design, not everything you did.</span></p>
+    </div>
+  </div>
+  <div class="grid-2 reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <figure>
+      <div class="media"><div class="ph alt"><span>Research image — 16:9</span></div></div>
+      <figcaption>Caption: what this image shows.</figcaption>
+    </figure>
+    <figure>
+      <div class="media"><div class="ph moss"><span>Research image — 16:9</span></div></div>
+      <figcaption>Caption: what this image shows.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PULL QUOTE (optional) ============ -->
+<section class="tinted">
+  <p class="quote reveal">“A key insight, need statement or line of feedback that <span class="accent">sums up</span> the project.”</p>
+  <span class="quote-src reveal">— Source, e.g. user interview, tutor feedback</span>
+  <!-- EDIT: quote and source, or delete this whole section -->
+</section>
+
+<!-- ============ 03 PROCESS ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">03</span><h2>Process</h2></div>
+    <div class="block-body">
+      <p><span class="hint">How did the idea develop? Show the journey from first sketches to the final design, including what changed along the way and why.</span></p>
+    </div>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="media"><div class="ph"><span>4:3</span></div></div>
+      <span class="num">01</span><h3>Explore</h3>
+      <p><span class="hint">Sketches, moodboards, early ideas.</span></p>
+    </div>
+    <div class="step">
+      <div class="media"><div class="ph alt"><span>4:3</span></div></div>
+      <span class="num">02</span><h3>Develop</h3>
+      <p><span class="hint">Wireframes, drafts, type and colour tests.</span></p>
+    </div>
+    <div class="step">
+      <div class="media"><div class="ph moss"><span>4:3</span></div></div>
+      <span class="num">03</span><h3>Test</h3>
+      <p><span class="hint">Feedback, accessibility checks, changes made.</span></p>
+    </div>
+    <div class="step">
+      <div class="media"><div class="ph"><span>4:3</span></div></div>
+      <span class="num">04</span><h3>Refine</h3>
+      <p><span class="hint">Final polish and production.</span></p>
+    </div>
+  </div>
+  <!-- EDIT: rename the 4 steps to match how this project actually went. Delete a step and the rest still line up -->
+</section>
+
+<!-- ============ 04 FINAL DESIGN ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">04</span><h2>Final Design</h2></div>
+    <div class="block-body">
+      <p><span class="hint">Present the finished work. Explain the key design decisions (type, colour, layout, system) and how each one answers the brief.</span></p>
+    </div>
+  </div>
+  <div class="gallery reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <figure>
+      <div class="media"><div class="ph"><span>Full-width image — 16:9</span></div></div>
+      <figcaption>Caption: what this image shows.</figcaption>
+    </figure>
+    <div class="grid-3">
+      <figure><div class="media tall"><div class="ph alt"><span>Portrait — 4:5</span></div></div></figure>
+      <figure><div class="media tall"><div class="ph moss"><span>Portrait — 4:5</span></div></div></figure>
+      <figure><div class="media tall"><div class="ph"><span>Portrait — 4:5</span></div></div></figure>
+    </div>
+    <div class="grid-2">
+      <figure><div class="media square"><div class="ph moss"><span>Square — 1:1</span></div></div></figure>
+      <figure><div class="media square"><div class="ph alt"><span>Square — 1:1</span></div></div></figure>
+    </div>
+  </div>
+  <!-- EDIT: mix and match the full-width, 3-across and 2-across rows. Delete rows you don't need -->
+</section>
+
+<!-- ============ 05 OUTCOME ============ -->
+<section class="tinted">
+  <div class="block reveal">
+    <div><span class="num">05</span><h2>Outcome &amp; Reflection</h2></div>
+    <div class="block-body">
+      <p><span class="hint">How did it turn out? Mention the grade, feedback, exhibition or results if you have them.</span></p>
+      <p><span class="hint">What did you learn, and what would you do differently next time?</span></p>
+      <div class="highlights">
+        <div><strong>01</strong><span class="hint">A key result or takeaway</span></div>
+        <div><strong>02</strong><span class="hint">A key result or takeaway</span></div>
+        <div><strong>03</strong><span class="hint">A key result or takeaway</span></div>
+      </div>
+      <!-- EDIT: swap 01/02/03 for real figures if you have them (e.g. "A", "5 screens", "3 personas"), or delete the highlights -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT PROJECT ============ -->
+<section>
+  <div class="next reveal">
+    <a href="case-study.html">
+      <div>
+        <p class="eyebrow">Next project</p>
+        <span class="next-title">Next Project Title</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <!-- EDIT: link and title of the next case study -->
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <p class="eyebrow">Get in touch</p>
+  <h2 class="reveal">Have a project in mind? I'd love to hear about it.</h2>
+  <a class="contact-email" href="mailto:thealittledale@gmail.com">thealittledale@gmail.com</a>
+</section>
+
+<footer>
+  <span>© 2026 Thea Littledale. All rights reserved.</span>
+  <span>Designed by Thea, built using Claude Code, hosted on GitHub Pages.</span>
+</footer>
+
+<script>
+  // custom cursor
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, .media').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
