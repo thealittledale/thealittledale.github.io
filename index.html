@@ -309,6 +309,7 @@
   .art-5{ background: #f0b429; --dot: var(--ink); --rot: 9deg; }
   .art-6{ background: var(--accent); --dot: var(--ink); --rot: -8deg; }
 
+  .project-art:has(img)::after{ display:none; }  /* no dot overlay on real images */
   .project-art .halftone{ opacity: 0.3; z-index: 1; }
 
   .project-overlay{
@@ -515,13 +516,12 @@
     <!-- Project 1 -->
     <article class="project reveal">
       <div class="project-art art-1">
-        <div class="halftone" style="width:140px;height:140px;bottom:-30px;left:-20px;"></div>
-        <a class="project-overlay" href="case-study.html"><span>View Case Study →</span></a>
+        <img src="images/get-a-room/tile.jpg" alt="Three screens from the Get a room! app on a blue background: venue picker, home screen and booking confirmation">
+        <a class="project-overlay" href="get-a-room.html"><span>View Case Study →</span></a>
       </div>
-      <div class="project-meta"><span>01 / Branding</span><span>2026</span></div>
-      <h3>Ember &amp; Oak</h3>
-      <p>Full brand identity and packaging system for an independent coffee roastery.</p>
-      <!-- EDIT: replace project title, category, year, description above -->
+      <div class="project-meta"><span>01 / UX &amp; App Design</span><span>2026</span></div>
+      <h3>Get a room!</h3>
+      <p>A community venue booking app for people with low digital confidence, designed in Figma as a group project.</p>
     </article>
 
     <!-- Project 2 -->

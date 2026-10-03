@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a room! — Thea Littledale</title>
+<meta name="description" content="Get a room!, a community venue booking app designed for people with low digital confidence. UX case study by Thea Littledale.">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #16181b;
+    --paper: #f2f3ee;
+    --paper-dim: #e7e9df;
+    --accent: #1854d6;
+    --pink: #e63888;
+    --moss: #4b5e52;
+    --line: rgba(22,24,27,0.16);
+    --serif: 'Fraunces', 'Iowan Old Style', serif;
+    --sans: 'Archivo', 'Helvetica Neue', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection{ background: var(--accent); color: var(--paper); }
+
+  /* paper grain texture */
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events:none;
+    z-index: 500;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- custom cursor ---------- */
+  .cursor{
+    position: fixed;
+    top:0; left:0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%,-50%);
+    transition: width .25s ease, height .25s ease, background .25s ease, border .25s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor.hover{
+    width: 64px; height: 64px;
+    background: transparent;
+    border: 1px solid var(--paper);
+  }
+  @media (hover: none){ .cursor{ display:none; } body{ cursor:auto; } }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky; top:0;
+    z-index: 100;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem);
+    background: rgba(243,237,225,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo{
+    font-family: var(--mono);
+    font-weight:700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+  .logo span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: clamp(1.2rem, 3vw, 2.4rem); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .nav-links a{ position:relative; padding-bottom: 3px; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background: var(--accent); transition: width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  section{ padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3.5rem); position: relative; }
+
+  /* small mono label with a rule before it, as on the homepage */
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display:flex; align-items:center; gap: 0.8rem;
+  }
+  .eyebrow::before{ content:""; width: 34px; height:1px; background: var(--moss); }
+
+  /* grey helper text explaining what to write; delete it as you fill in */
+  .hint{ color: #8a8f86; font-style: italic; }
+
+  /* ---------- case study header ---------- */
+  .cs-head{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+  .back{
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    display:inline-flex; gap: 0.5rem; margin-bottom: clamp(2rem, 6vw, 4rem);
+    opacity: 0.7; transition: opacity .3s ease;
+  }
+  .back:hover{ opacity: 1; color: var(--accent); }
+  .cs-head .eyebrow{ margin-bottom: 1.4rem; opacity:0; animation: rise .8s ease forwards .1s; }
+  .cs-title{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    opacity:0; animation: rise .9s ease forwards .25s;
+  }
+  .cs-title em{ font-style: italic; font-weight: 400; color: var(--pink); }
+  .cs-summary{
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 40ch;
+    margin-top: 1.6rem;
+    color: #3a352b;
+    opacity:0; animation: rise .9s ease forwards .4s;
+  }
+
+  /* project facts row */
+  .facts{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    opacity:0; animation: rise .9s ease forwards .55s;
+  }
+  @media (max-width: 760px){ .facts{ grid-template-columns: 1fr 1fr; } }
+  .facts dt{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--moss); margin-bottom: 0.4rem;
+  }
+  .facts dd{ font-size: 0.95rem; line-height: 1.5; }
+
+  /* ---------- image boxes ---------- */
+  .media{
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    aspect-ratio: 16/9;
+  }
+  .media.tall{ aspect-ratio: 4/5; }
+  .media.square{ aspect-ratio: 1/1; }
+  .media img, .media video{ width:100%; height:100%; object-fit: cover; display:block; }
+
+  /* placeholder: riso-style block, same look as the homepage tiles */
+  .ph{
+    position:absolute; inset:0;
+    background: var(--accent);
+    display:flex; align-items:flex-end;
+    padding: 1.2rem;
+    overflow:hidden;
+  }
+  .ph::after{
+    content:"";
+    position:absolute; inset: -14%;
+    background-image: radial-gradient(var(--pink) 32%, transparent 33%);
+    background-size: 15px 15px;
+    opacity: 0.5;
+    transform: rotate(7deg);
+  }
+  .ph.alt{ background: var(--ink); }
+  .ph.alt::after{ background-image: radial-gradient(#f0b429 32%, transparent 33%); transform: rotate(-6deg); }
+  .ph.moss{ background: var(--moss); }
+  .ph.moss::after{ background-image: radial-gradient(var(--paper) 32%, transparent 33%); transform: rotate(-4deg); }
+  .ph span{
+    position: relative; z-index: 1;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(22,24,27,0.55);
+    padding: 0.35rem 0.6rem; border-radius: 2px;
+  }
+
+  figcaption{
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em;
+    color: var(--moss); margin-top: 0.7rem;
+  }
+
+  .hero-media{ padding-top: 0; }
+
+  /* ---------- text sections: label left, words right ---------- */
+  .block{
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--line);
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 760px){ .block{ grid-template-columns: 1fr; } }
+  .block h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.1;
+  }
+  .block .num{
+    display:block;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .block-body p{
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: #3a352b;
+    max-width: 62ch;
+    margin-bottom: 1.2rem;
+  }
+  .block-body p:last-child{ margin-bottom: 0; }
+
+  /* pull quote */
+  .quote{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+    line-height: 1.3;
+    max-width: 28ch;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .quote .accent{ color: var(--pink); }
+  .quote-src{
+    display:block; text-align:center; margin-top: 1.2rem;
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss);
+  }
+
+  /* process steps */
+  .steps{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 760px){ .steps{ grid-template-columns: 1fr 1fr; } }
+  .step .media{ aspect-ratio: 4/3; margin-bottom: 1rem; }
+  .step .num{ font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
+  .step h3{ font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin: 0.4rem 0 0.4rem; }
+  .step p{ font-size: 0.88rem; color: #4a4438; line-height: 1.55; }
+
+  /* image grids */
+  .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); }
+  .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.4vw, 1.75rem); }
+  @media (max-width: 760px){ .grid-2, .grid-3{ grid-template-columns: 1fr; } }
+  .gallery > * + *{ margin-top: clamp(1rem, 2.4vw, 1.75rem); }
+
+  /* outcome highlights */
+  .highlights{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 760px){ .highlights{ grid-template-columns: 1fr; } }
+  .highlights div{ border-top: 2px solid var(--ink); padding-top: 1rem; }
+  .highlights strong{
+    display:block; font-family: var(--serif); font-weight: 900; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1;
+    color: var(--accent);
+  }
+  .highlights span{ display:block; margin-top: 0.5rem; font-size: 0.9rem; color: #4a4438; line-height: 1.5; }
+
+  .tinted{ background: var(--paper-dim); }
+
+  /* ---------- next project ---------- */
+  .next{
+    display:flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+  .next .eyebrow{ margin-bottom: 0.8rem; }
+  .next-title{
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.95;
+    transition: color .3s ease;
+  }
+  .next a:hover .next-title{ color: var(--accent); }
+  .next .arrow{ font-family: var(--serif); font-size: clamp(2.2rem, 7vw, 5rem); line-height: 0.95; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .next a:hover .arrow{ transform: translateX(10px); }
+  .next a{ display:flex; align-items:flex-end; gap: 1.2rem; }
+
+  /* ---------- contact + footer (same as homepage) ---------- */
+  .contact{
+    background: var(--ink);
+    color: var(--paper);
+    text-align:center;
+    padding: clamp(4rem, 12vw, 9rem) clamp(1.25rem, 5vw, 3.5rem);
+  }
+  .contact .eyebrow{ color: var(--pink); justify-content:center; margin-bottom: 1.6rem; }
+  .contact .eyebrow::before{ background: var(--pink); }
+  .contact h2{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    max-width: 18ch;
+    margin: 0 auto 2rem;
+    line-height: 1.15;
+  }
+  .contact-email{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    display:inline-block;
+    position: relative;
+    padding-bottom: 0.3rem;
+  }
+  .contact-email::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .contact-email:hover::after{ transform: scaleX(1); }
+
+  footer{
+    background: var(--ink);
+    color: rgba(243,237,225,0.5);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap: 0.6rem;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem) 1.8rem;
+    border-top: 1px solid rgba(243,237,225,0.14);
+  }
+  footer a:hover{ color: var(--paper); }
+
+  @keyframes rise{ from{ opacity:0; transform: translateY(18px);} to{ opacity:1; transform: translateY(0);} }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+
+  /* ---------- extras for this case study ---------- */
+  /* report figures keep their own shape instead of being cropped */
+  .media.auto{ aspect-ratio: auto; background: #fff; }
+  .media.auto img{ height: auto; object-fit: contain; }
+  .media.white{ background: #fff; }
+  .media.pad-sm{ padding: clamp(1.75rem, 4.5vw, 3.5rem); }
+  .media.pad{ padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.5rem, 7vw, 6rem); }
+  .media.white img{ object-fit: contain; }
+
+  .sub{
+    font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 1rem;
+  }
+  .sub small{
+    display:block; font-family: var(--mono); font-weight: 400; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--moss); margin-bottom: 0.4rem;
+  }
+
+  /* persona cards */
+  .personas{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); margin-top: clamp(2rem, 4vw, 3rem); }
+  @media (max-width: 760px){ .personas{ grid-template-columns: 1fr; } }
+
+  /* phone screens in a row on a white panel */
+  .phones{
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1rem, 4vw, 4rem);
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
+    gap: clamp(1.5rem, 3.5vw, 3rem);
+  }
+  .phones img{ width: clamp(130px, 17vw, 230px); height: auto; display: block; }
+  .phones.five img{ width: clamp(130px, 13vw, 185px); }
+
+  /* walkthrough video: black panel so the video's black edges disappear */
+  .video-panel{
+    background: #000;
+    border-radius: 3px;
+    padding: clamp(2rem, 6vw, 4.5rem) 1rem;
+    display: flex; justify-content: center;
+  }
+  .video-panel video{ width: clamp(220px, 28vw, 340px); height: auto; display: block; }
+  .persona{ background: var(--paper); border: 1px solid var(--line); border-radius: 3px; padding: clamp(1.4rem, 3vw, 2rem); }
+  .persona h3{ font-family: var(--serif); font-weight: 900; font-size: clamp(1.8rem, 3.4vw, 2.4rem); line-height: 1; }
+  .persona h3 span{ font-weight: 400; font-style: italic; color: var(--pink); }
+  .persona ul{ list-style: none; margin: 1rem 0 1.2rem; display:flex; flex-wrap: wrap; gap: 0.5rem; }
+  .persona li{
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.35rem 0.7rem; border: 1px solid var(--line); border-radius: 100px;
+  }
+  .persona p{ font-size: 0.95rem; line-height: 1.65; color: #3a352b; }
+  .persona .need{ margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--serif); font-style: italic; font-size: 1.02rem; line-height: 1.5; color: var(--ink); }
+  .persona .need b{ display:block; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a class="logo" href="index.html">THEA<span>·</span>LITTLEDALE</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HEADER ============ -->
+<section class="cs-head">
+  <a class="back" href="index.html#work">← All work</a>
+  <p class="eyebrow">Case Study 01 — UX &amp; App Design</p>
+  <h1 class="cs-title">Get a<br><em>room!</em></h1>
+  <p class="cs-summary">A mobile app for finding and booking local community spaces, designed so that people with low digital confidence can book a venue without needing to ask anyone for help.</p>
+  <dl class="facts">
+    <div><dt>Module</dt><dd>TG2UX, User-Centred Design</dd></div>
+    <div><dt>Role</dt><dd>Research, wireframes &amp; UI design (group project)</dd></div>
+    <div><dt>Tools</dt><dd>Figma, Stark</dd></div>
+    <div><dt>Timeline</dt><dd>Year 2, 2025–26</dd></div>
+  </dl>
+</section>
+
+<!-- ============ HERO IMAGE ============ -->
+<section class="hero-media">
+  <figure class="reveal">
+    <div class="phones">
+      <img src="images/get-a-room/phones/hunainza-1.jpg" alt="Choose a venue type screen">
+      <img src="images/get-a-room/phones/avery-1.jpg" alt="Search results with quick filter toggles">
+      <img src="images/get-a-room/phones/hunainza-4.jpg" alt="Venue page with 18+, bar and wheelchair access tags">
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 01 THE BRIEF ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">01</span><h2>The Brief</h2></div>
+    <div class="block-body">
+      <p>A local council has found that many of its services are underused because the apps and websites behind them are out of date. Our brief was to pick one service area, research who uses it, and design an app prototype in Figma that meets their needs.</p>
+      <p>We chose <strong>booking community spaces</strong>: village halls, community centres, sports facilities and libraries. They're used for everything from fitness classes to support groups, but the ways to book them are often confusing. As a result, a lot of community buildings sit empty.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 RESEARCH ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">02</span><h2>Research &amp; Insight</h2></div>
+    <div class="block-body">
+      <p>We looked at the main existing booking platforms, AllBooked and PeerSpace. Both had clear layouts and live support, but key details such as location, price and restrictions were hard to find, and their interfaces could shut out less confident users.</p>
+      <p>Older adults turned out to be some of the heaviest users of community buildings, especially village halls, libraries and community cafés. Yet one in seven people aged 65 and over can't turn on a device and log in to an account. Younger people book these spaces the least. That gave us two very different users to design for.</p>
+    </div>
+  </div>
+  <div class="grid-2 reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <figure>
+      <div class="media white"><img src="images/get-a-room/workshop-timetable.jpg" alt="Whiteboard covered in sticky notes mapping a day in the life of the persona Hunainza"></div>
+      <figcaption>IBM workshop: mapping Hunainza's day, from planning to booking confirmation.</figcaption>
+    </figure>
+    <figure>
+      <div class="media white"><img src="images/get-a-room/workshop-map.jpg" alt="Whiteboard stakeholder map showing everyone affected by Hunainza's booking"></div>
+      <figcaption>Stakeholder map: everyone affected by Hunainza's booking. This is where the 18+ rule came from.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PERSONAS ============ -->
+<section class="tinted">
+  <div class="block reveal">
+    <div><span class="num">03</span><h2>Personas &amp; Needs</h2></div>
+    <div class="block-body">
+      <p>From the research we created two personas: an older user with low digital confidence, who represents most people using these spaces, and a younger, tech-savvy user, to show how the app could bring new people in. At the IBM workshop we wrote several needs statements for each, then cut them down to the one thing each person most needs from a booking.</p>
+    </div>
+  </div>
+  <div class="personas reveal">
+    <div class="persona">
+      <h3>Hunainza <span>65</span></h3>
+      <ul><li>Retired</li><li>Just moved to a rural village</li><li>New to booking venues</li></ul>
+      <p>Feels disconnected from his new village and wants to host a poker night to meet people. The event has to be strictly 18+.</p>
+      <p class="need"><b>Needs statement</b>Needs a way to arrange a poker night while keeping it strictly 18+, so that he can keep the event age-appropriate and meet new people his age.</p>
+    </div>
+    <div class="persona">
+      <h3>Avery <span>25</span></h3>
+      <ul><li>Games developer</li><li>Lives in Bristol</li><li>Autistic</li></ul>
+      <p>Wants to book a venue for a friend's birthday party with catering. Can become overwhelmed easily and would rather not phone or email strangers to get answers.</p>
+      <p class="need"><b>Needs statement</b>Needs a way to know the policies on bringing food and drinks to a venue, so that she can book a birthday party without contacting other people for information.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PROCESS ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">04</span><h2>Process</h2></div>
+    <div class="block-body">
+      <p>We studied how successful apps handle search, filters and booking. From Airbnb we took the idea of a map view, which a tutor also suggested, so users can see at a glance how far away a venue is instead of reading it in small print. From Vinted we took quick filter toggles at the top of the results, with a separate panel for more detailed filtering.</p>
+      <p>We then sketched in rapid rounds: four frames each, discuss what works, sketch again. The strongest ideas became a low-fidelity flow in Figma, with as few steps and pages as possible.</p>
+    </div>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="media white"><img src="images/get-a-room/workshop-needs.jpg" alt="Sticky notes developing Hunainza's needs statement"></div>
+      <span class="num">01</span><h3>Workshop</h3>
+      <p>Needs statements and user journeys mapped out on the whiteboard.</p>
+    </div>
+    <div class="step">
+      <div class="media white"><img src="images/get-a-room/wireframes-catering.jpg" alt="Pencil wireframes for Avery's catering flow"></div>
+      <span class="num">02</span><h3>Sketch</h3>
+      <p>Quick pencil wireframes, four frames at a time.</p>
+    </div>
+    <div class="step">
+      <div class="media white"><img src="images/get-a-room/lofi-1.jpg" alt="Grey low-fidelity Figma screens"></div>
+      <span class="num">03</span><h3>Lo-fi</h3>
+      <p>The best sketches turned into a grey-box golden path in Figma.</p>
+    </div>
+    <div class="step">
+      <div class="media white"><img src="images/get-a-room/home-screen.jpg" alt="Final home screen of the Get a room! app"></div>
+      <span class="num">04</span><h3>Hi-fi</h3>
+      <p>Full colour, type and components, tested for accessibility.</p>
+    </div>
+  </div>
+  <div class="gallery reveal" style="margin-top: clamp(2.5rem, 5vw, 4rem);">
+    <figure>
+      <div class="media auto"><img src="images/get-a-room/wireframes.jpg" alt="Pencil wireframe sketches of the home page, venue page, catering options and filter screens"></div>
+      <figcaption>Wireframe sketches: home page, venue info and catering (left); search and filters for Hunainza (right).</figcaption>
+    </figure>
+    <figure>
+      <div class="media auto"><img src="images/get-a-room/lofi-2.jpg" alt="Low-fidelity Figma flow of the booking and checkout screens"></div>
+      <figcaption>Low-fidelity checkout flow in Figma: date and time, details, payment, catering, review, confirmed.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 05 FINAL DESIGN ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">05</span><h2>Final Design</h2></div>
+    <div class="block-body">
+      <p>Each persona has a <strong>golden path</strong>, the simplest route through the app to what they need, with key details like age limits and catering shown up front.</p>
+    </div>
+  </div>
+
+  <h3 class="sub reveal"><small>Prototype</small>Walkthrough of the Figma prototype</h3>
+  <figure class="reveal">
+    <div class="video-panel">
+      <video controls playsinline preload="metadata" poster="images/get-a-room/walkthrough-poster.jpg">
+        <source src="images/get-a-room/walkthrough.mp4" type="video/mp4">
+      </video>
+    </div>
+  </figure>
+
+  <h3 class="sub reveal"><small>Golden path 1</small>Hunainza books an 18+ poker night</h3>
+  <figure class="reveal">
+    <div class="phones five">
+      <img src="images/get-a-room/phones/hunainza-1.jpg" alt="Choose a venue type: nightclub, community hall, grand hall, lounge, pub or sports hall">
+      <img src="images/get-a-room/phones/hunainza-2.jpg" alt="Choose amenities such as TV, catering, wheelchair access and 18+">
+      <img src="images/get-a-room/phones/hunainza-3.jpg" alt="Recommended venues with a top pick">
+      <img src="images/get-a-room/phones/hunainza-4.jpg" alt="City Lights Club venue page with 18+, bar and wheelchair access tags">
+      <img src="images/get-a-room/phones/hunainza-5.jpg" alt="Community poker night event page with viewer stats">
+    </div>
+  </figure>
+
+  <h3 class="sub reveal"><small>Golden path 2</small>Avery books a birthday party with catering</h3>
+  <figure class="reveal">
+    <div class="phones">
+      <img src="images/get-a-room/phones/avery-1.jpg" alt="Search results for 'hall for party' with quick filter toggles">
+      <img src="images/get-a-room/phones/avery-2.jpg" alt="Detailed filter panel with sort options and amenities">
+      <img src="images/get-a-room/phones/avery-3.jpg" alt="Booking details: date, time, guests and extras">
+      <img src="images/get-a-room/phones/avery-4.jpg" alt="Catering packages with allergy questions">
+    </div>
+  </figure>
+</section>
+
+<!-- ============ 06 INCLUSIVE DESIGN ============ -->
+<section class="tinted">
+  <div class="block reveal">
+    <div><span class="num">06</span><h2>Inclusive Design</h2></div>
+    <div class="block-body">
+      <p><strong>Colour.</strong> Blue is the main colour because it's linked with calm and reliability, which helps when you're making decisions, and it stays readable for people with colour blindness. Neutral greys keep the background quiet, and green marks successful actions.</p>
+      <p><strong>Testing.</strong> We checked the design in Stark under all four main types of colour blindness, as well as for contrast and type size.</p>
+      <p><strong>Type.</strong> IBM Plex Serif for titles and headings, DM Sans for body text and labels, because its tall x-height stays legible at small sizes. We kept to two typefaces to avoid visual overload.</p>
+    </div>
+  </div>
+  <div class="gallery reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="grid-2">
+      <figure>
+        <div class="media square white pad-sm"><img src="images/get-a-room/palette.jpg" alt="The app's colour palette: brand blues, neutrals, success greens, warning yellows and danger pinks"></div>
+        <figcaption>Colour palette.</figcaption>
+      </figure>
+      <figure>
+        <div class="media square white pad-sm"><img src="images/get-a-room/type.jpg" alt="Type scale using IBM Plex Serif and DM Sans"></div>
+        <figcaption>Type scale: IBM Plex Serif and DM Sans.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <div class="media auto pad"><img src="images/get-a-room/stark.jpg" alt="The home screen shown four times under different colour-blindness filters"></div>
+      <figcaption>Home screen tested in Stark: protanopia, achromatopsia, deuteranopia and tritanopia.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 07 OUTCOME ============ -->
+<section>
+  <div class="block reveal">
+    <div><span class="num">07</span><h2>Outcome &amp; Reflection</h2></div>
+    <div class="block-body">
+      <p>The project produced a research report, a pitch to the council, a clickable Figma prototype with a recorded walkthrough, and my own illustrated report on the design process.</p>
+      <p>The IBM workshop was the turning point. Mapping everyone affected by a booking showed problems we wouldn't otherwise have spotted. If I took the app further, I'd make the secondary buttons bigger, as I did with the main confirm buttons, to better support users with mobility issues.</p>
+      <div class="highlights">
+        <div><strong>2</strong><span>personas, each with their own golden path</span></div>
+        <div><strong>4</strong><span>types of colour blindness tested in Stark</span></div>
+        <div><strong>1 in 7</strong><span>over-65s can't turn on a device, the statistic that shaped the design</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT ============ -->
+<section>
+  <div class="next reveal">
+    <a href="index.html#work">
+      <div>
+        <p class="eyebrow">Keep looking</p>
+        <span class="next-title">All work</span>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <p class="eyebrow">Get in touch</p>
+  <h2 class="reveal">Have a project in mind? I'd love to hear about it.</h2>
+  <a class="contact-email" href="mailto:thealittledale@gmail.com">thealittledale@gmail.com</a>
+</section>
+
+<footer>
+  <span>© 2026 Thea Littledale. All rights reserved.</span>
+  <span>Designed by Thea, built using Claude Code, hosted on GitHub Pages.</span>
+</footer>
+
+<script>
+  // custom cursor
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, .media').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
