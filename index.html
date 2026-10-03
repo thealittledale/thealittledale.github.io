@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thea Littledale — Graphic Design Student</title>
+<meta name="description" content="Portfolio of Thea Littledale, a graphic design student in Bristol, UK, working across brand identity, editorial, and print.">
+
+<!--
+  ============================================================
+  HOW TO CUSTOMIZE THIS TEMPLATE
+  ============================================================
+  1. Name, location, tagline, and bio are already filled in (Thea Littledale,
+     Bristol UK, third-year graphic design student).
+  2. Replace the 6 placeholder projects in the "Selected Work" section —
+     each has EDIT: comments marking title, category, year, and description.
+     Swap the CSS halftone "art blocks" for real project images by adding
+     an <img> inside .project-art (instructions inline there).
+  3. Replace the email address and social links in the Contact section
+     and footer (search for "hello@example.com" and "#").
+  4. Colors live in the :root CSS variables at the top of the <style>
+     block — change --ink, --paper, --accent, --pink, --moss to
+     re-theme the whole site in one place.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #16181b;
+    --paper: #e7e8e1;
+    --paper-dim: #dbddd1;
+    --accent: #1854d6;
+    --pink: #e63888;
+    --moss: #4b5e52;
+    --line: rgba(22,24,27,0.16);
+    --serif: 'Fraunces', 'Iowan Old Style', serif;
+    --sans: 'Archivo', 'Helvetica Neue', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  ::selection{ background: var(--accent); color: var(--paper); }
+
+  /* paper grain texture */
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events:none;
+    z-index: 500;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- custom cursor ---------- */
+  .cursor{
+    position: fixed;
+    top:0; left:0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%,-50%);
+    transition: width .25s ease, height .25s ease, background .25s ease, border .25s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor.hover{
+    width: 64px; height: 64px;
+    background: transparent;
+    border: 1px solid var(--paper);
+  }
+  @media (hover: none){ .cursor{ display:none; } body{ cursor:auto; } }
+
+  /* ---------- marquee ---------- */
+  .marquee{
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 9px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    z-index: 50;
+  }
+  .marquee-track{
+    display: inline-flex;
+    animation: scroll 26s linear infinite;
+  }
+  .marquee-track span{
+    padding: 0 1.5rem;
+    display:inline-flex;
+    align-items:center;
+    gap: 1.5rem;
+  }
+  .marquee-track span::after{ content:"—"; color: var(--accent); }
+  @keyframes scroll{ from{ transform: translateX(0);} to{ transform: translateX(-50%);} }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky; top:0;
+    z-index: 100;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem);
+    background: rgba(243,237,225,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo{
+    font-family: var(--mono);
+    font-weight:700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+  .logo span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: clamp(1.2rem, 3vw, 2.4rem); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .nav-links a{ position:relative; padding-bottom: 3px; }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background: var(--accent); transition: width .3s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  section{ padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 5vw, 3.5rem); position: relative; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height: 82vh;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    position: relative;
+  }
+  .hero-eyebrow{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display:flex; align-items:center; gap: 0.8rem;
+    margin-bottom: 1.6rem;
+    opacity:0;
+    animation: rise .8s ease forwards .1s;
+  }
+  .hero-eyebrow::before{
+    content:""; width: 34px; height:1px; background: var(--moss);
+  }
+  h1.hero-name{
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(3.4rem, 11vw, 8.8rem);
+    line-height: 0.86;
+    letter-spacing: -0.01em;
+    position: relative;
+    opacity:0;
+    animation: rise .9s ease forwards .25s;
+  }
+  h1.hero-name em{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--pink);
+  }
+  .hero-role{
+    font-family: var(--sans);
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    max-width: 34ch;
+    margin-top: 1.6rem;
+    line-height:1.5;
+    color: #3a352b;
+    opacity:0;
+    animation: rise .9s ease forwards .4s;
+  }
+  .hero-index{
+    position:absolute;
+    top: clamp(0.5rem, 4vw, 2rem);
+    right: clamp(1.25rem, 5vw, 3.5rem);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    text-align:right;
+    color: var(--moss);
+    line-height: 1.6;
+    opacity:0;
+    animation: rise .9s ease forwards .55s;
+  }
+  .scroll-cue{
+    margin-top: 3rem;
+    display:flex; align-items:center; gap: 0.7rem;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    opacity:0;
+    animation: rise .9s ease forwards .7s;
+  }
+  .scroll-cue .dot{
+    width: 7px; height:7px; border-radius:50%; background: var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{ transform: scale(1); opacity:1;} 50%{ transform: scale(1.6); opacity:0.4;} }
+  @keyframes rise{ from{ opacity:0; transform: translateY(18px);} to{ opacity:1; transform: translateY(0);} }
+
+  /* halftone decoration */
+  .halftone{
+    position:absolute;
+    width: 220px; height:220px;
+    background-image: radial-gradient(var(--accent) 22%, transparent 23%);
+    background-size: 11px 11px;
+    opacity: 0.16;
+    border-radius: 50%;
+    pointer-events:none;
+  }
+  .hero .halftone{ top: -40px; right: 8vw; }
+
+  /* ---------- section headers ---------- */
+  .section-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1.4rem;
+  }
+  .section-head h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+  }
+  .section-head .meta{
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  /* ---------- work grid ---------- */
+  .work-grid{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: clamp(1rem, 2.4vw, 1.75rem);
+  }
+  .project{
+    grid-column: span 3;
+    position: relative;
+    cursor: none;
+  }
+  .project:nth-child(1){ grid-column: span 4; }
+  .project:nth-child(2){ grid-column: span 2; }
+  .project:nth-child(3){ grid-column: span 2; }
+  .project:nth-child(4){ grid-column: span 4; }
+  .project:nth-child(5){ grid-column: span 3; }
+  .project:nth-child(6){ grid-column: span 3; }
+
+  @media (max-width: 760px){
+    .project, .project:nth-child(n){ grid-column: span 6; }
+  }
+
+  .project-art{
+    aspect-ratio: 4/3;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  /* To use real images instead of these generated placeholders:
+     add  <img src="your-image.jpg" alt="Project name">  as the first
+     child inside .project-art, and it will fill the frame automatically. */
+  .project-art img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+  .project:hover .project-art img{ transform: scale(1.06); }
+
+  /* riso-style overprint: a flat base color with a halftone dot layer
+     in a second ink, offset and rotated per project like a mis-registered
+     risograph print pass */
+  .project-art{ --dot: var(--pink); --rot: 6deg; }
+  .project-art::after{
+    content:"";
+    position:absolute;
+    inset: -14%;
+    background-image: radial-gradient(var(--dot) 32%, transparent 33%);
+    background-size: 15px 15px;
+    opacity: 0.55;
+    transform: rotate(var(--rot));
+  }
+  .art-1{ background: var(--accent); --dot: var(--pink); --rot: 7deg; }
+  .art-2{ background: var(--ink); --dot: #f0b429; --rot: -6deg; }
+  .art-3{ background: var(--pink); --dot: var(--accent); --rot: 4deg; }
+  .art-4{ background: var(--moss); --dot: var(--paper); --rot: -4deg; }
+  .art-5{ background: #f0b429; --dot: var(--ink); --rot: 9deg; }
+  .art-6{ background: var(--accent); --dot: var(--ink); --rot: -8deg; }
+
+  .project-art .halftone{ opacity: 0.3; z-index: 1; }
+
+  .project-overlay{
+    position:absolute; inset:0; z-index: 2;
+    display:flex; align-items:flex-end; justify-content:space-between;
+    padding: 1.4rem;
+    background: linear-gradient(to top, rgba(22,24,27,0.6), transparent 55%);
+    opacity:0;
+    transition: opacity .4s ease;
+  }
+  .project:hover .project-overlay{ opacity:1; }
+  .project-overlay span{
+    font-family: var(--mono);
+    color: var(--paper);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display:flex; align-items:center; gap: 0.5rem;
+  }
+
+  .project-meta{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-top: 1rem;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+  .project h3{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    margin-top: 0.35rem;
+  }
+  .project p{
+    font-size: 0.92rem;
+    color: #4a4438;
+    margin-top: 0.4rem;
+    max-width: 42ch;
+    line-height: 1.5;
+  }
+
+  /* ---------- about ---------- */
+  .about{ background: var(--paper-dim); }
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+  @media (max-width: 760px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-lead{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+    line-height: 1.35;
+  }
+  .about-lead .accent{ color: var(--pink); }
+  .about-body p{
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: #3a352b;
+    margin-bottom: 1.2rem;
+  }
+  .skills{
+    display:flex; flex-wrap:wrap; gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  .skills span{
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: var(--paper);
+  }
+
+  /* ---------- process strip ---------- */
+  .process{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 760px){ .process{ grid-template-columns: 1fr 1fr; } }
+  .process-step{ padding: 2rem 0.5rem 0.5rem; }
+  .process-step .num{
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  .process-step h4{
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0.6rem 0 0.5rem;
+  }
+  .process-step p{ font-size: 0.88rem; color: #4a4438; line-height:1.55; }
+
+  /* ---------- contact ---------- */
+  .contact{
+    background: var(--ink);
+    color: var(--paper);
+    text-align:center;
+    padding: clamp(4rem, 12vw, 9rem) clamp(1.25rem, 5vw, 3.5rem);
+  }
+  .contact .hero-eyebrow{ color: var(--pink); justify-content:center; }
+  .contact .hero-eyebrow::before{ background: var(--pink); }
+  .contact h2{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    max-width: 18ch;
+    margin: 0 auto 2rem;
+    line-height: 1.15;
+  }
+  .contact-email{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    display:inline-block;
+    position: relative;
+    padding-bottom: 0.3rem;
+  }
+  .contact-email::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .contact-email:hover::after{ transform: scaleX(1); }
+  .social-row{
+    margin-top: 3rem;
+    display:flex; justify-content:center; gap: 2rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .social-row a{ opacity: 0.75; transition: opacity .3s ease; }
+  .social-row a:hover{ opacity: 1; color: var(--pink); }
+
+  footer{
+    background: var(--ink);
+    color: rgba(243,237,225,0.5);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap: 0.6rem;
+    padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem) 1.8rem;
+    border-top: 1px solid rgba(243,237,225,0.14);
+  }
+  footer a:hover{ color: var(--paper); }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Brand Identity</span><span>Editorial Design</span><span>Art Direction</span><span>Print &amp; Packaging</span><span>Visual Systems</span>
+    <span>Brand Identity</span><span>Editorial Design</span><span>Art Direction</span><span>Print &amp; Packaging</span><span>Visual Systems</span>
+  </div>
+</div>
+
+<nav>
+  <div class="logo">THEA<span>·</span>LITTLEDALE</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="halftone"></div>
+  <p class="hero-eyebrow">Portfolio — 2026</p>
+  <h1 class="hero-name">Thea<br><em>Littledale</em></h1>
+  <p class="hero-role">Designer with A* A-level in fine art and strong Claude Code skills, seeking first job after degree in Graphics.</p>
+  <div class="hero-index">No. 01<br>Selected Work</div>
+  <div class="scroll-cue"><span class="dot"></span> Scroll to explore</div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section id="work">
+  <div class="section-head reveal">
+    <h2>Selected Work</h2>
+    <span class="meta">06 Projects — 2023–2026</span>
+  </div>
+
+  <div class="work-grid">
+
+    <!-- Project 1 -->
+    <article class="project reveal">
+      <div class="project-art art-1">
+        <div class="halftone" style="width:140px;height:140px;bottom:-30px;left:-20px;"></div>
+        <div class="project-overlay"><span>View Case Study →</span></div>
+      </div>
+      <div class="project-meta"><span>01 / Branding</span><span>2026</span></div>
+      <h3>Ember &amp; Oak</h3>
+      <p>Full brand identity and packaging system for an independent coffee roastery.</p>
+      <!-- EDIT: replace project title, category, year, description above -->
+    </article>
+
+    <!-- Project 2 -->
+    <article class="project reveal">
+      <div class="project-art art-2">
+        <div class="project-overlay"><span>View Case Study →</span></div>
+      </div>
+      <div class="project-meta"><span>02 / Editorial</span><span>2025</span></div>
+      <h3>Quarterly Journal</h3>
+      <p>Art direction and layout system for a quarterly design magazine.</p>
+    </article>
+
+    <!-- Project 3 -->
+    <article class="project reveal">
+      <div class="project-art art-3">
+        <div class="project-overlay"><span>View Case Study →</span></div>
+      </div>
+      <div class="project-meta"><span>03 / Poster</span><span>2025</span></div>
+      <h3>Sun Valley Festival</h3>
+      <p>Poster series and wayfinding for an annual music &amp; arts festival.</p>
+    </article>
+
+    <!-- Project 4 -->
+    <article class="project reveal">
+      <div class="project-art art-4">
+        <div class="halftone" style="width:160px;height:160px;top:-30px;right:-30px;"></div>
+        <div class="project-overlay"><span>View Case Study →</span></div>
+      </div>
+      <div class="project-meta"><span>04 / Digital</span><span>2024</span></div>
+      <h3>Northline Studio</h3>
+      <p>Visual identity and website design for an architecture practice.</p>
+    </article>
+
+    <!-- Project 5 -->
+    <article class="project reveal">
+      <div class="project-art art-5">
+        <div class="project-overlay"><span>View Case Study →</span></div>
+      </div>
+      <div class="project-meta"><span>05 / Packaging</span><span>2024</span></div>
+      <h3>Field Notes Co.</h3>
+      <p>Packaging redesign and label system for a botanical skincare line.</p>
+    </article>
+
+    <!-- Project 6 -->
+    <article class="project reveal">
+      <div class="project-art art-6">
+        <div class="project-overlay"><span>View Case Study →</span></div>
+      </div>
+      <div class="project-meta"><span>06 / Type</span><span>2023</span></div>
+      <h3>Marlowe Display</h3>
+      <p>An original display typeface designed for editorial headlines.</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="about">
+  <div class="about-grid">
+    <div class="about-lead reveal">
+      “Lorem ipsum dolor sit amet, <span class="accent">consectetur</span> adipiscing elit, sed do eiusmod tempor incididunt.”
+      <!-- EDIT: replace with her own quote, philosophy, or a line about her practice -->
+    </div>
+    <div class="about-body reveal">
+      <p>I'm Thea, a third-year graphic design student based in Bristol, UK. My work spans identity systems, editorial layout, and print production, with a growing focus on typographic detail and considered colour.</p>
+      <p>Currently finishing my degree and open to placements, freelance briefs, and new collaborations.</p>
+      <!-- EDIT: replace bio paragraphs above with more specifics as her practice develops (university, modules, awards, etc.) -->
+      <div class="skills">
+        <span>Adobe CC</span><span>Figma</span><span>Typography</span><span>Art Direction</span><span>Print Production</span><span>Illustration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section>
+  <div class="section-head reveal">
+    <h2>How I Work</h2>
+    <span class="meta">Process</span>
+  </div>
+  <div class="process reveal">
+    <div class="process-step">
+      <span class="num">01</span>
+      <h4>Discover</h4>
+      <p>Understand the brand, audience, and goals before a single pixel moves.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">02</span>
+      <h4>Concept</h4>
+      <p>Explore direction through sketches, mood, and typographic studies.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">03</span>
+      <h4>Design</h4>
+      <p>Refine the chosen direction into a considered, detailed system.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">04</span>
+      <h4>Deliver</h4>
+      <p>Prepare final files, guidelines, and production-ready assets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact">
+  <p class="hero-eyebrow">Get in touch</p>
+  <h2 class="reveal">Have a project in mind? I'd love to hear about it.</h2>
+  <a class="contact-email" href="mailto:thealittledale@gmail.com">thealittledale@gmail.com</a>
+  <!-- EDIT: replace email address above -->
+  <div class="social-row">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Behance</a>
+    <!-- EDIT: replace # with real profile URLs -->
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Thea Littledale. All rights reserved.</span>
+  <span>Designed by Thea, built using Claude Code, hosted on GitHub Pages.</span>
+</footer>
+
+<script>
+  // custom cursor
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, .project').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
