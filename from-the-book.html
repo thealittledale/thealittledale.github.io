@@ -110,6 +110,18 @@
   }
   .eyebrow::before{ content:""; width: 34px; height:1px; background: var(--moss); }
 
+  /* halftone decoration */
+  .halftone{
+    position:absolute;
+    top: -60px; right: 4vw;
+    width: clamp(320px, 40vw, 600px); height: clamp(320px, 40vw, 600px);
+    background-image: radial-gradient(var(--accent) 22%, transparent 23%);
+    background-size: 11px 11px;
+    opacity: 0.16;
+    border-radius: 50%;
+    pointer-events:none;
+  }
+
   /* ---------- case study header ---------- */
   .cs-head{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
   .back{
@@ -355,6 +367,7 @@
 
 <!-- ============ HEADER ============ -->
 <section class="cs-head">
+  <div class="halftone"></div>
   <a class="back" href="index.html#work">← All work</a>
   <p class="eyebrow">Case Study 05 — Editorial Design</p>
   <h1 class="cs-title">From the Book<br><em>to the Streets</em></h1>
