@@ -307,18 +307,7 @@
 
   .media.auto{ aspect-ratio: auto; background: #fff; }
   .media.auto img{ height: auto; object-fit: contain; }
-
-  .phones{
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1rem, 4vw, 4rem);
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start;
-    gap: clamp(1.5rem, 3.5vw, 3rem);
-  }
-  .phones img{ width: clamp(130px, 17vw, 230px); height: auto; display: block; }
-
-  .phones.photos img{ width: clamp(140px, 20vw, 280px); border-radius: 2px; }
+  .media.pad{ padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.5rem, 7vw, 6rem); }
 
   .points{ list-style: none; margin-top: 0.4rem; }
   .points li{ font-size: 1.02rem; line-height: 1.75; color: #3a352b; max-width: 62ch; padding-left: 1.4rem; position: relative; margin-bottom: 0.9rem; }
@@ -382,7 +371,7 @@
 <!-- ============ HERO IMAGE ============ -->
 <section class="hero-media">
   <figure class="reveal">
-    <div class="media auto"><img src="images/portfolio-website/tile.jpg" alt="Figma designs for this portfolio website at desktop and mobile sizes"></div>
+    <div class="media auto"><img src="images/portfolio-website/tile.jpg?v=2" alt="Figma designs for this portfolio website at desktop and mobile sizes"></div>
   </figure>
 </section>
 
@@ -429,10 +418,11 @@
     <div class="swatch"><div class="chip" style="background:#4b5e52"></div><b>Moss</b><span>#4B5E52</span></div>
   </div>
   <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
-    <div class="phones photos">
-      <img src="images/portfolio-website/typography.jpg" alt="Figma typography page listing the site's 33 text styles" style="width: clamp(260px, 44vw, 560px); border: 1px solid var(--line);">
+    <div class="screens">
+      <img src="images/portfolio-website/foundations.jpg?v=2" alt="Figma design system foundations: fonts, colour swatches, spacing, layout grid and motion notes" style="width: min(46%, 520px);">
+      <img src="images/portfolio-website/typography.jpg?v=2" alt="Figma typography page listing the site's text styles" style="width: min(46%, 520px);">
     </div>
-    <figcaption>The 33 text styles in my Figma design system.</figcaption>
+    <figcaption>My Figma design system: foundations (fonts, colour, spacing, grid and motion) and the text styles.</figcaption>
   </figure>
 </section>
 
@@ -451,10 +441,14 @@
   </div>
   <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
     <div class="screens">
-      <img class="desk" src="images/portfolio-website/desktop.jpg" alt="Full-page Figma design of the portfolio at desktop width">
-      <img class="mob" src="images/portfolio-website/mobile.jpg" alt="Full-page Figma design of the portfolio at mobile width">
+      <img class="desk" src="images/portfolio-website/desktop.jpg?v=2" alt="Full-page Figma design of the portfolio at desktop width">
+      <img class="mob" src="images/portfolio-website/mobile.jpg?v=2" alt="Full-page Figma design of the portfolio at mobile width">
     </div>
-    <figcaption>Early desktop (1440px) and mobile (390px) layouts in Figma, before my own projects replaced the placeholder content.</figcaption>
+    <figcaption>Full-page designs in Figma at desktop (1440px) and mobile (390px) widths, with placeholder projects and copy.</figcaption>
+  </figure>
+  <figure class="reveal" style="margin-top: clamp(2rem, 4vw, 3rem);">
+    <div class="media auto pad"><img src="images/portfolio-website/components.jpg?v=2" alt="Figma components: navigation, ticker, labels, halftone disc and project tiles"></div>
+    <figcaption>Reusable Figma components: navigation, ticker, labels, the halftone disc and the project tiles.</figcaption>
   </figure>
 </section>
 
