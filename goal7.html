@@ -100,7 +100,6 @@
 
   section{ padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3.5rem); position: relative; }
 
-  /* small mono label with a rule before it, as on the homepage */
   .eyebrow{
     font-family: var(--mono);
     font-size: 0.8rem;
@@ -110,9 +109,6 @@
     display:flex; align-items:center; gap: 0.8rem;
   }
   .eyebrow::before{ content:""; width: 34px; height:1px; background: var(--moss); }
-
-  /* grey helper text explaining what to write; delete it as you fill in */
-  .hint{ color: #8a8f86; font-style: italic; }
 
   /* ---------- case study header ---------- */
   .cs-head{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
@@ -166,37 +162,9 @@
     border: 1px solid var(--line);
     aspect-ratio: 16/9;
   }
-  .media.tall{ aspect-ratio: 4/5; }
+  
   .media.square{ aspect-ratio: 1/1; }
   .media img, .media video{ width:100%; height:100%; object-fit: cover; display:block; }
-
-  /* placeholder: riso-style block, same look as the homepage tiles */
-  .ph{
-    position:absolute; inset:0;
-    background: var(--accent);
-    display:flex; align-items:flex-end;
-    padding: 1.2rem;
-    overflow:hidden;
-  }
-  .ph::after{
-    content:"";
-    position:absolute; inset: -14%;
-    background-image: radial-gradient(var(--pink) 32%, transparent 33%);
-    background-size: 15px 15px;
-    opacity: 0.5;
-    transform: rotate(7deg);
-  }
-  .ph.alt{ background: var(--ink); }
-  .ph.alt::after{ background-image: radial-gradient(#f0b429 32%, transparent 33%); transform: rotate(-6deg); }
-  .ph.moss{ background: var(--moss); }
-  .ph.moss::after{ background-image: radial-gradient(var(--paper) 32%, transparent 33%); transform: rotate(-4deg); }
-  .ph span{
-    position: relative; z-index: 1;
-    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--paper);
-    background: rgba(22,24,27,0.55);
-    padding: 0.35rem 0.6rem; border-radius: 2px;
-  }
 
   figcaption{
     font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em;
@@ -236,53 +204,16 @@
   .block-body p:last-child{ margin-bottom: 0; }
 
   /* pull quote */
-  .quote{
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.6rem, 3.6vw, 2.5rem);
-    line-height: 1.3;
-    max-width: 28ch;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .quote .accent{ color: var(--pink); }
-  .quote-src{
-    display:block; text-align:center; margin-top: 1.2rem;
-    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss);
-  }
 
   /* process steps */
-  .steps{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-  }
-  @media (max-width: 760px){ .steps{ grid-template-columns: 1fr 1fr; } }
-  .step .media{ aspect-ratio: 4/3; margin-bottom: 1rem; }
-  .step .num{ font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
-  .step h3{ font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin: 0.4rem 0 0.4rem; }
-  .step p{ font-size: 0.88rem; color: #4a4438; line-height: 1.55; }
 
   /* image grids */
   .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); }
-  .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.4vw, 1.75rem); }
+  
   @media (max-width: 760px){ .grid-2, .grid-3{ grid-template-columns: 1fr; } }
   .gallery > * + *{ margin-top: clamp(1rem, 2.4vw, 1.75rem); }
 
   /* outcome highlights */
-  .highlights{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
-    margin-top: 2rem;
-  }
-  @media (max-width: 760px){ .highlights{ grid-template-columns: 1fr; } }
-  .highlights div{ border-top: 2px solid var(--ink); padding-top: 1rem; }
-  .highlights strong{
-    display:block; font-family: var(--serif); font-weight: 900; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1;
-    color: var(--accent);
-  }
-  .highlights span{ display:block; margin-top: 0.5rem; font-size: 0.9rem; color: #4a4438; line-height: 1.5; }
 
   .tinted{ background: var(--paper-dim); }
 
@@ -303,7 +234,6 @@
   .next a:hover .arrow{ transform: translateX(10px); }
   .next a{ display:flex; align-items:flex-end; gap: 1.2rem; }
 
-  /* ---------- contact + footer (same as homepage) ---------- */
   .contact{
     background: var(--ink);
     color: var(--paper);
@@ -355,8 +285,6 @@
   .reveal{ opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
   .reveal.in{ opacity:1; transform: translateY(0); }
 
-  /* ---------- extras for this case study ---------- */
-  /* report figures keep their own shape instead of being cropped */
   .media.auto{ aspect-ratio: auto; background: #fff; }
   .media.auto img{ height: auto; object-fit: contain; }
   .media.white{ background: #fff; }
@@ -364,20 +292,6 @@
   .media.pad{ padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.5rem, 7vw, 6rem); }
   .media.white img{ object-fit: contain; }
 
-  .sub{
-    font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-    margin: clamp(2.5rem, 5vw, 3.5rem) 0 1rem;
-  }
-  .sub small{
-    display:block; font-family: var(--mono); font-weight: 400; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--moss); margin-bottom: 0.4rem;
-  }
-
-  /* persona cards */
-  .personas{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2.4vw, 1.75rem); margin-top: clamp(2rem, 4vw, 3rem); }
-  @media (max-width: 760px){ .personas{ grid-template-columns: 1fr; } }
-
-  /* phone screens in a row on a white panel */
   .phones{
     background: #fff;
     border: 1px solid var(--line);
@@ -387,9 +301,7 @@
     gap: clamp(1.5rem, 3.5vw, 3rem);
   }
   .phones img{ width: clamp(130px, 17vw, 230px); height: auto; display: block; }
-  .phones.five img{ width: clamp(130px, 13vw, 185px); }
 
-  /* walkthrough video: black panel so the video's black edges disappear */
   .video-panel{
     background: #000;
     border-radius: 3px;
@@ -397,42 +309,11 @@
     display: flex; justify-content: center;
   }
   .video-panel video{ width: clamp(220px, 28vw, 340px); height: auto; display: block; }
-  .persona{ background: var(--paper); border: 1px solid var(--line); border-radius: 3px; padding: clamp(1.4rem, 3vw, 2rem); }
-  .persona h3{ font-family: var(--serif); font-weight: 900; font-size: clamp(1.8rem, 3.4vw, 2.4rem); line-height: 1; }
-  .persona h3 span{ font-weight: 400; font-style: italic; color: var(--pink); }
-  .persona ul{ list-style: none; margin: 1rem 0 1.2rem; display:flex; flex-wrap: wrap; gap: 0.5rem; }
-  .persona li{
-    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 0.35rem 0.7rem; border: 1px solid var(--line); border-radius: 100px;
-  }
-  .persona p{ font-size: 0.95rem; line-height: 1.65; color: #3a352b; }
-  .persona .need{ margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font-family: var(--serif); font-style: italic; font-size: 1.02rem; line-height: 1.5; color: var(--ink); }
-  .persona .need b{ display:block; font-family: var(--mono); font-style: normal; font-weight: 400; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
 
-  /* ---------- extras for this case study ---------- */
-  .phones.covers img{ width: clamp(120px, 15vw, 210px); box-shadow: 0 8px 24px rgba(22,24,27,0.18); }
   .phones.photos img{ width: clamp(140px, 20vw, 280px); border-radius: 2px; }
-  .spreads{
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 6vw, 5rem);
-    display: grid; gap: clamp(2rem, 5vw, 4rem);
-  }
-  .spreads img{ width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(22,24,27,0.16); }
+
   .credit{ font-size: 0.82rem; color: #6b6f68; line-height: 1.6; max-width: 70ch; margin-top: 2.5rem; }
-  .phones.labels img{ height: clamp(200px, 30vw, 420px); width: auto; box-shadow: 0 8px 24px rgba(22,24,27,0.16); }
-  .phones.caps img{ width: clamp(100px, 13vw, 170px); }
-  .phones.logos img{ width: clamp(160px, 26vw, 340px); }
-  .phones.cards img{ width: clamp(240px, 34vw, 440px); box-shadow: 0 8px 24px rgba(22,24,27,0.16); }
-  .jackets{
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 6vw, 5rem);
-    display: grid; gap: clamp(2rem, 5vw, 3.5rem);
-  }
-  .jackets img{ width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(22,24,27,0.18); }
+
   .video-panel.wide{ background: #fff; border: 1px solid var(--line); padding: clamp(2rem, 6vw, 4.5rem) clamp(1rem, 6vw, 5rem); }
   .video-panel.wide video{ width: 100%; max-width: 960px; box-shadow: 0 10px 30px rgba(22,24,27,0.18); }
 </style>
