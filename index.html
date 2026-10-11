@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thea Littledale — Graphic Design Student</title>
-<meta name="description" content="Portfolio of Thea Littledale, a graphic designer studying Typography and Graphic Communication at the University of Reading, working across identity, editorial, packaging and print.">
+<meta name="description" content="Portfolio of Thea Littledale, a Bristol-based graphic designer working across campaigns, brand identity, editorial and motion, for print and digital.">
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -166,8 +166,8 @@
   }
   .hero-role{
     font-family: var(--sans);
-    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
-    max-width: 34ch;
+    font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+    max-width: 62ch;
     margin-top: 1.6rem;
     line-height:1.5;
     color: #3a352b;
@@ -329,9 +329,10 @@
     margin-bottom: 1.2rem;
   }
   .skills{
-    display:flex; flex-wrap:wrap; gap: 0.6rem;
-    margin-top: 1.5rem;
+    grid-column: 1 / -1;
+    display:flex; flex-wrap:wrap; justify-content:center; gap: 0.6rem;
   }
+  .skills .row-break{ flex-basis: 100%; height: 0; }
   .skills span{
     font-family: var(--mono);
     font-size: 0.74rem;
@@ -348,7 +349,6 @@
     display:grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
   @media (max-width: 760px){ .process{ grid-template-columns: 1fr 1fr; } }
@@ -379,8 +379,8 @@
     font-family: var(--serif);
     font-style: italic;
     font-weight: 500;
-    font-size: clamp(2.2rem, 6vw, 4rem);
-    max-width: 18ch;
+    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+    max-width: 32ch;
     margin: 0 auto 2rem;
     line-height: 1.15;
   }
@@ -433,8 +433,8 @@
 
 <div class="marquee">
   <div class="marquee-track">
-    <span>Brand Identity</span><span>Editorial Design</span><span>Art Direction</span><span>Print &amp; Packaging</span><span>Visual Systems</span>
-    <span>Brand Identity</span><span>Editorial Design</span><span>Art Direction</span><span>Print &amp; Packaging</span><span>Visual Systems</span>
+    <span>Brand Identity</span><span>Editorial Design</span><span>Art Direction</span><span>Print &amp; Packaging</span><span>Visual Systems</span><span>Claude Code / GitHub</span>
+    <span>Brand Identity</span><span>Editorial Design</span><span>Art Direction</span><span>Print &amp; Packaging</span><span>Visual Systems</span><span>Claude Code / GitHub</span>
   </div>
 </div>
 
@@ -452,7 +452,7 @@
   <div class="halftone"></div>
   <p class="hero-eyebrow">Portfolio — 2026</p>
   <h1 class="hero-name">Thea<br><em>Littledale</em></h1>
-  <p class="hero-role">Designer with A* A-level in fine art, currently studying Typography and Graphic Communication at the University of Reading, seeking first job after degree.</p>
+  <p class="hero-role">Graphic designer based in Bristol, currently in the final year of a Typography and Graphic Communication degree at the University of Reading. Considerable freelance experience. I design campaigns, brand identities and editorial work across print, screen and motion, often for environmental and nature-led briefs.<br>A* in A-Level Fine Art.</p>
   <div class="scroll-cue"><span class="dot"></span> Scroll to explore</div>
 </section>
 
@@ -464,71 +464,70 @@
   </div>
 
   <div class="work-grid">
-
     <!-- Project 1 -->
-    <article class="project reveal">
-      <div class="project-art">
-        <img src="images/get-a-room/tile.jpg" alt="Three screens from the Get a room! app on a blue background: venue picker, home screen and booking confirmation">
-        <a class="project-overlay" href="get-a-room.html"><span>View Case Study →</span></a>
-      </div>
-      <div class="project-meta"><span>01 / UX &amp; App Design</span><span>2026</span></div>
-      <h3>Get a room!</h3>
-      <p>A community venue booking app for people with low digital confidence, designed in Figma as a group project.</p>
-    </article>
-
-    <!-- Project 2 -->
-    <article class="project reveal">
-      <div class="project-art">
-        <img src="images/from-the-book/tile.jpg" alt="Book jacket for From the Book to the Streets: yellow stacked title on dark grey">
-        <a class="project-overlay" href="from-the-book.html"><span>View Case Study →</span></a>
-      </div>
-      <div class="project-meta"><span>02 / Editorial</span><span>2025</span></div>
-      <h3>From the Book to the Streets</h3>
-      <p>Cover and interior redesign of an essay collection on typography, printed and bound by hand.</p>
-    </article>
-
-    <!-- Project 3 -->
-    <article class="project reveal">
-      <div class="project-art">
-        <img src="images/fuku/tile.jpg" alt="FUKU beer bottle mock-up with a wave and rising sun label">
-        <a class="project-overlay" href="fuku.html"><span>View Case Study →</span></a>
-      </div>
-      <div class="project-meta"><span>03 / Packaging</span><span>2025</span></div>
-      <h3>FUKU Brew</h3>
-      <p>Bottle label and cap for a Japanese-style lager brewed in Italy.</p>
-    </article>
-
-    <!-- Project 4 -->
-    <article class="project reveal">
-      <div class="project-art">
-        <img src="images/alo/tile.jpg" alt="African Livestock Observatory logo in white on red">
-        <a class="project-overlay" href="alo.html"><span>View Case Study →</span></a>
-      </div>
-      <div class="project-meta"><span>04 / Logo &amp; Identity</span><span>2025</span></div>
-      <h3>African Livestock Observatory</h3>
-      <p>A logo for a University of Reading research hub, chosen by the client to take forward.</p>
-    </article>
-
-    <!-- Project 5 -->
     <article class="project reveal">
       <div class="project-art">
         <img src="images/vsi/tile.jpg" alt="Covers for Forests, Oceans and Deserts: A Very Short Introduction">
         <a class="project-overlay" href="vsi.html"><span>View Case Study →</span></a>
       </div>
-      <div class="project-meta"><span>05 / Book Covers</span><span>2025</span></div>
+      <div class="project-meta"><span>01 / Book Covers</span><span>2025</span></div>
       <h3>Very Short Introductions</h3>
-      <p>A series of three hand-painted covers for Oxford University Press: Forests, Oceans and Deserts.</p>
+      <p>Three hand-painted covers for Oxford University Press on Forests, Oceans and Deserts, designed as a series within OUP's brand guidelines and finished with embossed titles.</p>
     </article>
 
-    <!-- Project 6 -->
+    <!-- Project 2 -->
+    <article class="project reveal">
+      <div class="project-art">
+        <img src="images/alo/tile.jpg" alt="African Livestock Observatory logo in white on red">
+        <a class="project-overlay" href="alo.html"><span>View Case Study →</span></a>
+      </div>
+      <div class="project-meta"><span>02 / Logo &amp; Identity</span><span>2025</span></div>
+      <h3>African Livestock Observatory</h3>
+      <p>A logo for a University of Reading research hub on livestock in Africa, designed to work everywhere from LinkedIn to a lapel badge. The client chose it to take forward.</p>
+    </article>
+
+    <!-- Project 3 -->
     <article class="project reveal">
       <div class="project-art">
         <img src="images/goal7/tile.jpg" alt="Poster of a wind turbine forming a clock face, for Global Goal 7">
         <a class="project-overlay" href="goal7.html"><span>View Case Study →</span></a>
       </div>
-      <div class="project-meta"><span>06 / Campaign</span><span>2026</span></div>
+      <div class="project-meta"><span>03 / Campaign &amp; Motion</span><span>2026</span></div>
       <h3>Time's Ticking</h3>
-      <p>Poster, animated billboard and leaflet for UN Global Goal 7, Affordable and Clean Energy.</p>
+      <p>A poster, animated billboard and leaflet for UN Global Goal 7, designed as one campaign with a clear call to action, from storyboard to final print and motion files.</p>
+    </article>
+
+    <!-- Project 4 -->
+    <article class="project reveal">
+      <div class="project-art">
+        <img src="images/get-a-room/tile.jpg" alt="Three screens from the Get a room! app on a blue background: venue picker, home screen and booking confirmation">
+        <a class="project-overlay" href="get-a-room.html"><span>View Case Study →</span></a>
+      </div>
+      <div class="project-meta"><span>04 / UX &amp; Accessibility</span><span>2026</span></div>
+      <h3>Get a room!</h3>
+      <p>A community venue booking app for people with low digital confidence, researched and prototyped in Figma as a team, and tested for colour blindness and contrast.</p>
+    </article>
+
+    <!-- Project 5 -->
+    <article class="project reveal">
+      <div class="project-art">
+        <img src="images/from-the-book/tile.jpg" alt="Book jacket for From the Book to the Streets: yellow stacked title on dark grey">
+        <a class="project-overlay" href="from-the-book.html"><span>View Case Study →</span></a>
+      </div>
+      <div class="project-meta"><span>05 / Editorial &amp; Print</span><span>2025</span></div>
+      <h3>From the Book to the Streets</h3>
+      <p>Cover and interior redesign of an essay collection on typography, from typeface tests and grid through to a printed, hand-bound copy.</p>
+    </article>
+
+    <!-- Project 6 -->
+    <article class="project reveal">
+      <div class="project-art">
+        <img src="images/fuku/tile.jpg" alt="FUKU beer bottle mock-up with a wave and rising sun label">
+        <a class="project-overlay" href="fuku.html"><span>View Case Study →</span></a>
+      </div>
+      <div class="project-meta"><span>06 / Packaging</span><span>2025</span></div>
+      <h3>FUKU Brew</h3>
+      <p>Bottle label and cap for a real client, a Japanese-style lager brewed in Italy, briefed and delivered remotely, with a back label in three languages.</p>
     </article>
 
   </div>
@@ -542,11 +541,11 @@
       <span class="quote-by">Sam Robinson, Head of Vibes &amp; Vision, <a href="fuku.html">FUKU Brew</a></span>
     </div>
     <div class="about-body reveal">
-      <p>I'm Thea, a graphic designer. My work spans identity systems, editorial layout, and print production, with a growing focus on typographic detail and considered colour.</p>
-      <p>I'm as comfortable illustrating with paper and pens as I am designing websites and building with Claude Code.</p>
-      <div class="skills">
-        <span>InDesign</span><span>Illustrator</span><span>Photoshop</span><span>After Effects</span><span>Premiere Pro</span><span>Procreate</span><span>Figma</span><span>Claude Code</span><span>Typography</span><span>Art Direction</span><span>Print Production</span><span>Illustration</span>
-      </div>
+      <p>I'm Thea, a graphic designer who enjoys every stage of a brief – understanding who it's for, sketching ideas, refining through feedback and preparing artwork that's ready for print, screen or motion.</p>
+      <p>My work spans campaigns, brand identity and editorial, with a focus on clear typography, considered colour and consistency across a set of outputs. That might be a poster, billboard and leaflet that feel like one campaign, or a book series that sits within a publisher's brand. I'm as happy painting by hand as working in InDesign or After Effects, and I like keeping up with new tools: I built this site with Claude Code.</p>
+    </div>
+    <div class="skills reveal">
+      <span>InDesign</span><span>Illustrator</span><span>Photoshop</span><span>Acrobat Pro</span><span>After Effects</span><span>Premiere Pro</span><span>Figma</span><span>Procreate</span><span>Word</span><span>PowerPoint</span><i class="row-break"></i><span>Claude Code</span><span>Typography</span><span>Layout</span><span>Brand Guidelines</span><span>Print Production</span><span>Motion</span><span>Illustration</span><span>Image Editing</span><span>Accessibility</span>
     </div>
   </div>
 </section>
@@ -561,22 +560,22 @@
     <div class="process-step">
       <span class="num">01</span>
       <h4>Discover</h4>
-      <p>Understand the brand, audience, and goals before a single pixel moves.</p>
+      <p>Get to know the audience, the brand guidelines and what the work needs to do.</p>
     </div>
     <div class="process-step">
       <span class="num">02</span>
       <h4>Concept</h4>
-      <p>Explore direction through sketches, mood, and typographic studies.</p>
+      <p>Explore ideas quickly through sketches, mood boards and type tests.</p>
     </div>
     <div class="process-step">
       <span class="num">03</span>
-      <h4>Design</h4>
-      <p>Refine the chosen direction into a considered, detailed system.</p>
+      <h4>Refine</h4>
+      <p>Develop the strongest idea and build in feedback, working iteratively with the client.</p>
     </div>
     <div class="process-step">
       <span class="num">04</span>
       <h4>Deliver</h4>
-      <p>Prepare final files, guidelines, and production-ready assets.</p>
+      <p>Prepare print-ready and digital design work, adhering to deadlines and budgets.</p>
     </div>
   </div>
 </section>
@@ -584,7 +583,7 @@
 <!-- ============ CONTACT ============ -->
 <section id="contact" class="contact">
   <p class="hero-eyebrow">Get in touch</p>
-  <h2 class="reveal">Have a project in mind? I'd love to hear about it.</h2>
+  <h2 class="reveal">Please email me if you'd like to discuss a freelance project.</h2>
   <a class="contact-email" href="mailto:thealittledale@gmail.com">thealittledale@gmail.com</a>
   <div class="social-row">
     <a href="https://www.linkedin.com/in/thea-littledale-4b7141357/" target="_blank" rel="noopener">LinkedIn</a>
@@ -594,7 +593,7 @@
 
 <footer>
   <span>© 2026 Thea Littledale. All rights reserved.</span>
-  <span>Designed by Thea, built using Claude Code, hosted on GitHub Pages.</span>
+  <span>Designed by Thea in Figma, built using Claude Code, hosted on GitHub Pages.</span>
 </footer>
 
 <script>
