@@ -137,6 +137,27 @@
   }
   .nav-links a:hover::after{ width:100%; }
 
+  /* ---------- work dropdown ---------- */
+  .nav-work{ position: relative; }
+  .nav-work > button{
+    font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
+    background: none; border: 0; padding: 0 0 3px; cursor: none; display: inline-flex; align-items: center; gap: 0.4em;
+  }
+  .nav-work > button::after{ content: "▾"; font-size: 0.8em; transition: transform .25s ease; }
+  .nav-work.open > button::after{ transform: rotate(180deg); }
+  .work-menu{
+    position: absolute; top: calc(100% + 0.9rem); left: -1rem; min-width: 15rem;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 3px;
+    box-shadow: 0 12px 30px rgba(22,24,27,0.12);
+    padding: 0.5rem 0; display: none; z-index: 200;
+  }
+  .nav-work.open .work-menu{ display: block; }
+  .nav-links .work-menu a{ display: block; padding: 0.55rem 1rem; white-space: nowrap; }
+  .nav-links .work-menu a::after{ display: none; }
+  .work-menu a:hover, .work-menu a.active{ color: var(--accent); background: var(--paper-dim); }
+  .work-menu a:first-child{ border-bottom: 1px solid var(--line); margin-bottom: 0.35rem; padding-bottom: 0.75rem; }
+  @media (max-width: 760px){ .work-menu{ left: auto; right: -1rem; } }
+
   section{ padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 5vw, 3.5rem); position: relative; }
 
   /* ---------- hero ---------- */
@@ -271,6 +292,17 @@
   
   .project-art img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s cubic-bezier(.16,1,.3,1); }
   .project:hover .project-art img{ transform: scale(1.06); }
+
+  /* filtered view: hide other projects and lay the rest out evenly */
+  .work-grid.filtered .project{ grid-column: span 3; order: 0; }
+  .work-grid.filtered .project.rest{ grid-column: span 2; order: 2; }
+  .more-work{ display: none; grid-column: 1 / -1; order: 1; border-top: 1px solid var(--line); padding-top: 1.4rem; margin-top: clamp(1.5rem, 4vw, 3rem); }
+  .work-grid.filtered .more-work{ display: block; }
+  .more-work h3{ font-family: var(--serif); font-weight: 600; font-style: italic; font-size: clamp(1.5rem, 3.5vw, 2.4rem); }
+  @media (max-width: 760px){ .work-grid.filtered .project, .work-grid.filtered .project.rest{ grid-column: span 6; } }
+  .filter-note{ font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss); margin: -1.5rem 0 2rem; display: none; }
+  .filter-note.show{ display: block; }
+  .filter-note a{ color: var(--accent); margin-left: 1rem; }
 
   .project-overlay{
     position:absolute; inset:0; z-index: 2;
@@ -463,7 +495,18 @@
 <nav>
   <div class="logo">THEA<span>·</span>LITTLEDALE</div>
   <div class="nav-links">
-    <a href="#work">Work</a>
+    <div class="nav-work">
+      <button type="button" aria-expanded="false" aria-haspopup="true">Work</button>
+      <div class="work-menu">
+        <a href="#work" data-filter="all">All work</a>
+        <a href="index.html?filter=editorial#work" data-filter="editorial">Editorial</a>
+        <a href="index.html?filter=ux#work" data-filter="ux">UX &amp; Web</a>
+        <a href="index.html?filter=info#work" data-filter="info">Information Design</a>
+        <a href="index.html?filter=branding#work" data-filter="branding">Branding &amp; Packaging</a>
+        <a href="index.html?filter=campaigns#work" data-filter="campaigns">Campaigns &amp; Motion</a>
+        <a href="index.html?filter=illustration#work" data-filter="illustration">Illustration</a>
+      </div>
+    </div>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
@@ -484,10 +527,11 @@
     <h2>Selected Work</h2>
     <span class="meta">09 Projects – 2024–2026</span>
   </div>
+  <p class="filter-note">Showing: <span></span><a href="index.html#work">Show all work</a></p>
 
   <div class="work-grid">
     <!-- Project 1 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="editorial illustration">
       <div class="project-art">
         <img src="images/vsi/tile.jpg" alt="Covers for Forests, Oceans and Deserts: A Very Short Introduction">
         <a class="project-overlay" href="vsi.html"><span>View Case Study →</span></a>
@@ -498,7 +542,7 @@
     </article>
 
     <!-- Project 2 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="editorial info campaigns">
       <div class="project-art">
         <img src="images/food-insecurity/tile.jpg" alt="Infographic spread about UK food insecurity, built from food photography and charts">
         <a class="project-overlay" href="food-insecurity.html"><span>View Case Study →</span></a>
@@ -509,7 +553,7 @@
     </article>
 
     <!-- Project 3 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="editorial">
       <div class="project-art">
         <img src="images/from-the-book/tile.jpg" alt="Book jacket for From the Book to the Streets: yellow stacked title on dark grey">
         <a class="project-overlay" href="from-the-book.html"><span>View Case Study →</span></a>
@@ -520,7 +564,7 @@
     </article>
 
     <!-- Project 4 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="ux info">
       <div class="project-art">
         <img src="images/get-a-room/tile.jpg" alt="Three screens from the Get a room! app on a blue background: venue picker, home screen and booking confirmation">
         <a class="project-overlay" href="get-a-room.html"><span>View Case Study →</span></a>
@@ -531,7 +575,7 @@
     </article>
 
     <!-- Project 5 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="campaigns info branding">
       <div class="project-art">
         <img src="images/goal7/tile.jpg" alt="Poster of a wind turbine forming a clock face, for Global Goal 7">
         <a class="project-overlay" href="goal7.html"><span>View Case Study →</span></a>
@@ -542,7 +586,7 @@
     </article>
 
     <!-- Project 6 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="ux">
       <div class="project-art">
         <img src="images/portfolio-website/tile.jpg?v=2" alt="Figma designs for this portfolio website at desktop and mobile sizes">
         <a class="project-overlay" href="portfolio-website.html"><span>View Case Study →</span></a>
@@ -553,7 +597,7 @@
     </article>
 
     <!-- Project 7 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="branding">
       <div class="project-art">
         <img src="images/alo/tile.jpg" alt="African Livestock Observatory logo in white on red">
         <a class="project-overlay" href="alo.html"><span>View Case Study →</span></a>
@@ -564,7 +608,7 @@
     </article>
 
     <!-- Project 8 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="branding illustration">
       <div class="project-art">
         <img src="images/fuku/tile.jpg" alt="FUKU beer bottle mock-up with a wave and rising sun label">
         <a class="project-overlay" href="fuku.html"><span>View Case Study →</span></a>
@@ -575,7 +619,7 @@
     </article>
 
     <!-- Project 9 -->
-    <article class="project reveal">
+    <article class="project reveal" data-tags="illustration">
       <div class="project-art">
         <img src="images/illustration/tile.jpg?v=2" alt="Detail of the War Is Madness oil painting: a smiling man in a red hat on a Cyprus beach">
         <a class="project-overlay" href="illustration.html"><span>View Gallery →</span></a>
@@ -585,6 +629,7 @@
       <p>A gallery of my paintings, drawings and prints, from oil portraits to screenprints and observational drawing.</p>
     </article>
 
+    <div class="more-work"><h3>More work</h3></div>
   </div>
 </section>
 
@@ -673,6 +718,41 @@
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // work dropdown
+  const navWork = document.querySelector('.nav-work');
+  navWork.querySelector('button').addEventListener('click', e => {
+    e.stopPropagation();
+    const open = navWork.classList.toggle('open');
+    navWork.querySelector('button').setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', () => { navWork.classList.remove('open'); navWork.querySelector('button').setAttribute('aria-expanded', false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') navWork.classList.remove('open'); });
+
+  // filter Selected Work by design sector
+  const grid = document.querySelector('.work-grid'), note = document.querySelector('.filter-note'), meta = document.querySelector('#work .meta');
+  const names = {'editorial':'Editorial','ux':'UX & Web','info':'Information Design','branding':'Branding & Packaging','campaigns':'Campaigns & Motion','illustration':'Illustration'};
+  function applyFilter(cat){
+    const all = !cat || cat === 'all' || !names[cat];
+    let n = 0;
+    grid.querySelectorAll('.project').forEach(p => {
+      const show = all || p.dataset.tags.split(' ').includes(cat);
+      p.classList.toggle('rest', !all && !show); if (show) n++;
+    });
+    grid.classList.toggle('filtered', !all);
+    note.classList.toggle('show', !all);
+    note.querySelector('span').textContent = all ? '' : names[cat] + ' – ' + n + (n === 1 ? ' project' : ' projects');
+    meta.textContent = all ? '09 Projects – 2024–2026' : String(n).padStart(2,'0') + ' of 9 projects';
+    document.querySelectorAll('.work-menu a').forEach(a => a.classList.toggle('active', a.dataset.filter === (all ? 'all' : cat)));
+  }
+  document.querySelectorAll('.work-menu a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); const cat = a.dataset.filter;
+    history.replaceState(null, '', cat === 'all' ? 'index.html#work' : 'index.html?filter=' + cat + '#work');
+    applyFilter(cat); navWork.classList.remove('open');
+    document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+  }));
+  note.querySelector('a').addEventListener('click', e => { e.preventDefault(); history.replaceState(null, '', 'index.html#work'); applyFilter('all'); });
+  applyFilter(new URLSearchParams(location.search).get('filter'));
 </script>
 
 </body>
